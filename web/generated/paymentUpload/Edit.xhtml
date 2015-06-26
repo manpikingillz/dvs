@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaymentUploadEditDlg" widgetVar="PaymentUploadEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPaymentUploadTitle}">
+            <h:form id="PaymentUploadEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paymentUploadController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPaymentUploadLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{paymentUploadController.selected.id}" title="#{bundle.EditPaymentUploadTitle_id}" required="true" requiredMessage="#{bundle.EditPaymentUploadRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditPaymentUploadLabel_paymentUploadName}" for="paymentUploadName" />
+                        <p:inputText id="paymentUploadName" value="#{paymentUploadController.selected.paymentUploadName}" title="#{bundle.EditPaymentUploadTitle_paymentUploadName}" />
+                        <p:outputLabel value="#{bundle.EditPaymentUploadLabel_upload}" for="upload" />
+                        <p:inputTextarea rows="4" cols="30" id="upload" value="#{paymentUploadController.selected.upload}" title="#{bundle.EditPaymentUploadTitle_upload}" />
+                        <p:outputLabel value="#{bundle.EditPaymentUploadLabel_uploadPath}" for="uploadPath" />
+                        <p:inputTextarea rows="4" cols="30" id="uploadPath" value="#{paymentUploadController.selected.uploadPath}" title="#{bundle.EditPaymentUploadTitle_uploadPath}" />
+                        <p:outputLabel value="#{bundle.EditPaymentUploadLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{paymentUploadController.selected.autoTimestamp}" title="#{bundle.EditPaymentUploadTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPaymentUploadLabel_investorDataPaymentDetail}" for="investorDataPaymentDetail" />
+                        <p:selectOneMenu id="investorDataPaymentDetail" value="#{paymentUploadController.selected.investorDataPaymentDetail}" required="true" requiredMessage="#{bundle.EditPaymentUploadRequiredMessage_investorDataPaymentDetail}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{investorDataPaymentDetailController.itemsAvailableSelectOne}"
+                                           var="investorDataPaymentDetailItem"
+                                           itemValue="#{investorDataPaymentDetailItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paymentUploadController.update}" value="#{bundle.Save}" update="display,:PaymentUploadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PaymentUploadEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PaymentUploadEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

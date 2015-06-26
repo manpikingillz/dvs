@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CurrencyTypeViewDlg" widgetVar="CurrencyTypeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCurrencyTypeTitle}">
+            <h:form id="CurrencyTypeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{currencyTypeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCurrencyTypeLabel_id}"/>
+                        <h:outputText value="#{currencyTypeController.selected.id}" title="#{bundle.ViewCurrencyTypeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCurrencyTypeLabel_currencyTypeShortName}"/>
+                        <h:outputText value="#{currencyTypeController.selected.currencyTypeShortName}" title="#{bundle.ViewCurrencyTypeTitle_currencyTypeShortName}"/>
+                        <h:outputText value="#{bundle.ViewCurrencyTypeLabel_currencyTypeLongName}"/>
+                        <h:outputText value="#{currencyTypeController.selected.currencyTypeLongName}" title="#{bundle.ViewCurrencyTypeTitle_currencyTypeLongName}"/>
+                        <h:outputText value="#{bundle.ViewCurrencyTypeLabel_autoTimestamp}"/>
+                        <h:outputText value="#{currencyTypeController.selected.autoTimestamp}" title="#{bundle.ViewCurrencyTypeTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CurrencyTypeViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

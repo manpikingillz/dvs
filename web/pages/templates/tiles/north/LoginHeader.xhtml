@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+                <h:panelGroup layout="block" style="background: #E0EAFD;">
+            <h:panelGroup layout="block" style="color: purple;  display: inline-block; width: 80%;">
+
+                <p:panel style="border-style: dashed; display: inline-block; background: #E0EAFD!important; vertical-align: middle;">
+                    <p:graphicImage library="resources" value="/resources/images/use_logo.jpg"  style="height: 70px" />
+                </p:panel>
+
+                <p:panel style="border-style: none; display: inline-block; background: #E0EAFD!important">
+                    <h:outputText value="Data Vending System" style="font-size: x-large; font-weight: bolder; color: #0A2693;vertical-align: middle" />
+                </p:panel>
+
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" style="color: gray; display: inline-block; vertical-align: middle; background: #E0EAFD; width: 20%">
+                <h:form>
+                    <p:panel style="background: #ffffff!important">
+                         <h:outputText value="You are not Logged In"/><p:spacer width="10px"/> 
+
+
+                    </p:panel>
+
+<!--                <p:commandLink value="Logout" style="color: #0A2693; font-weight: bolder"/><p:spacer width="10px" height="0px"/>
+                    <p:commandLink value="Settings" style="color: #0A2693; font-weight: bolder"/><p:spacer width="10px" height="0px"/>  
+                    <p:commandLink value="Help" style="color: #0A2693; font-weight: bolder"/>-->
+
+                </h:form>
+            </h:panelGroup>
+        </h:panelGroup>
+    </h:body>
+</html>
+

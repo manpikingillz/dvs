@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TYPEOFDATATOSELLhasDATADURATIONCATEGORYEditDlg" widgetVar="TYPEOFDATATOSELLhasDATADURATIONCATEGORYEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYTitle}">
+            <h:form id="TYPEOFDATATOSELLhasDATADURATIONCATEGORYEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.id}" title="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYTitle_id}" required="true" requiredMessage="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.price}" title="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYTitle_price}" required="true" requiredMessage="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYRequiredMessage_price}"/>
+                        <p:outputLabel value="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.autoTimestamp}" title="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYLabel_dataDurationCategory}" for="dataDurationCategory" />
+                        <p:selectOneMenu id="dataDurationCategory" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.dataDurationCategory}" required="true" requiredMessage="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYRequiredMessage_dataDurationCategory}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{dataDurationCategoryController.itemsAvailableSelectOne}"
+                                           var="dataDurationCategoryItem"
+                                           itemValue="#{dataDurationCategoryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYLabel_typeOfDataToSell}" for="typeOfDataToSell" />
+                        <p:selectOneMenu id="typeOfDataToSell" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.typeOfDataToSell}" required="true" requiredMessage="#{bundle.EditTYPEOFDATATOSELLhasDATADURATIONCATEGORYRequiredMessage_typeOfDataToSell}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{typeOfDataToSellController.itemsAvailableSelectOne}"
+                                           var="typeOfDataToSellItem"
+                                           itemValue="#{typeOfDataToSellItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.update}" value="#{bundle.Save}" update="display,:TYPEOFDATATOSELLhasDATADURATIONCATEGORYListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TYPEOFDATATOSELLhasDATADURATIONCATEGORYEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TYPEOFDATATOSELLhasDATADURATIONCATEGORYEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

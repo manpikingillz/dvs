@@ -1,0 +1,194 @@
+
+body{
+    margin: 0px!important;
+}
+.ui-widget-content {
+    /*font-size: 12px !important;*/
+        /*background: #f3f2f5!important;*/
+    font-size: 12px!important;
+
+}
+.ui-layout-north {
+    z-index:20 !important;
+    overflow:visible !important;;
+    /*background-color: #D6D6D6;*/
+    text-align: center;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow:visible !important;
+    /*background-color: #B5D0E0;*/
+    /*color: #2F556A;*/
+    /*text-shadow: -1px 0 black, 0 1px white, 1px 0 white, 0 -1px black;*/
+    font-family: Segoe UI,Arial,sans-serif;
+}
+.ui-widget-header {
+    /*text-align: center;*/
+    /*text-transform: uppercase;*/ 
+}
+.ui-datatable-footer .ui-button{
+    float: left;
+}
+.ui-layout-south{
+    text-align: center;
+}
+.confirm-output-Details{
+    /*color: seagreen;*/ 
+    font-weight: bold
+}
+.ui-growl{ 
+    left: 39%;
+    margin-top: 10%;
+}
+.ui-button{
+    /*background: #ffffff!important;*/ 
+}
+
+.ui-wizard-step-title{
+    font-size: 12px!important;
+}
+.ui-accordion-header{
+    font-size: 12px!important;
+}
+.ui-panelmenu-header{
+    font-size: 12px!important;
+}
+.ui-layout-unit-header{
+    font-size: 12px!important;
+    font-weight: normal!important;
+}
+.ui-widget input,
+.ui-inputtextarea,
+.ui-selectonemenu,
+.ui-datepicker,
+.ui-selectonemenu-items{
+    background: #ffffff!important;
+    /*border-color: #822580!important;*/
+    /*width: 200px!important;*/
+}
+
+.ui-widget input,
+.ui-inputtextarea,
+.ui-datepicker{
+    width: 200px!important;
+}
+.ui-widget .ui-selectonemenu{
+    width: 210px!important;
+}
+.ui-datepicker-header,.ui-datepicker td{
+   font-size: 12px!important;
+   font-weight: normal!important;
+}
+.ui-datatable-even{
+    /*background-color: #DADADA!important;*/
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    /*color: #77037C!important;*/
+
+}
+
+/*Side menu*/
+.ui-menu {
+    background: #F2F1F0!important;
+    
+}
+.ui-menu .ui-menuitem-text{
+    color: #622564!important;
+}
+.ui-menu .ui-state-hover {
+    background: purple!important;
+    
+}
+.ui-menu .ui-state-hover .ui-menuitem-text {
+    color: white!important;
+}
+
+
+/*Top menu*/
+.ui-menubar {
+    /*background: purple!important;*/
+    background: #4285F4!important;
+    /*background: #232323 url(/resources/images/nav-bg.png) repeat-x 0 0!important;*/
+    color: white!important;
+}
+.ui-menubar .ui-menu-child{
+    background: #808080!important;
+    /*background: -webkit-linear-gradient(left bottom, purple, #808080);*/
+}
+.ui-menubar .ui-menuitem-text{
+    color: white!important;
+}
+.ui-menubar .ui-state-hover{
+    background: purple!important;
+}
+
+/*Datatable*/
+.ui-datatable .ui-state-highlight{
+    background: #924695!important;
+}
+
+
+/*Login page*/
+.loginTopPanel{
+    background: #FFE0F7!important;
+    /*background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(254,245,255) 50%,rgb(253,240,255) 100%)!important;*/
+    border-style: double!important;
+    border-width: medium;
+}
+
+
+/*tabview*/
+.ui-tabs-panel{
+    background: #FFF1EE!important;
+}
+
+.ui-tabs .ui-tabs-nav.ui-widget-header li a{
+    color: #590D4F!important;
+    background-color: #E2CCE1!important;
+}
+.ui-tabs .ui-tabs-nav.ui-widget-header li.ui-state-active a, .ui-tabs .ui-tabs-nav.ui-widget-header li.ui-state-active a{
+    background-color: #590D4F!important;
+    color: white!important;
+}
+
+/*accordion panel*/
+.ui-accordion .ui-accordion-header.ui-state-default a{
+    color: #590D4F!important;
+}
+
+/*SelectOneMenu*/
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+    background: #590D4F!important;
+}
+
+/*-webkit-linear-gradient(left top, #F5F5F5 , red);*/
+.ui-messages-info{
+    background-color: #E2CCE1!important; 
+    border-color: #E2CCE1!important
+}
+
+.ui-datatable-header{
+    background-color: #FFD4FF!important;
+}
+.ui-widget-header{
+    background-color: #FFD4FF!important;
+}
+
+.ui-datatable thead th{
+    text-align: left!important;
+}
+.ui-datatable tfoot td{
+    padding-left: 50px;
+}
+
+
+.ui-panelgrid tr, .ui-panelgrid td{
+    border: none!important;
+}
+
+.ui-button{
+    background-color: #4285F4!important;
+}
+
+.ui-button-text{
+    color: red!important;
+}

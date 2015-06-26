@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/pages/templates/Template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="View Active Data"/>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel style="width: 30%; margin: auto; text-align: center">
+            <h:outputText value="View active data" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+        </p:panel>
+        <h:form id="requestDataPriceForm">
+            <p:selectOneButton id="requestedDataMenu">
+                <f:selectItems value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.items}"
+                               var="item"
+                               itemValue="#{item}"
+                               itemLabel="#{item.typeOfDataToSell.typeOfDataToSell}"/>
+
+            </p:selectOneButton>
+        </h:form>
+        <p:spacer height="5px" width="0px"/>
+        <ui:include src="/pages/protected/investor/data/ALSI.xhtml"/>
+    </ui:define>
+</ui:composition>
+

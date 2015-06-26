@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserEditDlg" widgetVar="UserEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUserTitle}">
+            <h:form id="UserEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUserLabel_personId}" for="personId" />
+                        <p:inputText id="personId" value="#{userController.selected.personId}" title="#{bundle.EditUserTitle_personId}" />
+                        <p:outputLabel value="#{bundle.EditUserLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{userController.selected.username}" title="#{bundle.EditUserTitle_username}" />
+                        <p:outputLabel value="#{bundle.EditUserLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" />
+                        <p:outputLabel value="#{bundle.EditUserLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{userController.selected.autoTimestamp}" title="#{bundle.EditUserTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_enabledOrDisabled}" for="enabledOrDisabled" />
+                        <p:selectBooleanCheckbox id="enabledOrDisabled" value="#{userController.selected.enabledOrDisabled}" />
+                        <p:outputLabel value="#{bundle.EditUserLabel_person}" for="person" />
+                        <p:selectOneMenu id="person" value="#{userController.selected.person}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_person}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="personItem"
+                                           itemValue="#{personItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserLabel_employee}" for="employee" />
+                        <p:selectOneMenu id="employee" value="#{userController.selected.employee}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="employeeItem"
+                                           itemValue="#{employeeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserLabel_investor}" for="investor" />
+                        <p:selectOneMenu id="investor" value="#{userController.selected.investor}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{investorController.itemsAvailableSelectOne}"
+                                           var="investorItem"
+                                           itemValue="#{investorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserLabel_personId}" for="personId" />
+                        <p:inputText id="personId" value="#{userController.selected.personId}" title="#{bundle.EditUserTitle_personId}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_personId}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_surname}" for="surname" />
+                        <p:inputText id="surname" value="#{userController.selected.surname}" title="#{bundle.EditUserTitle_surname}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_surname}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_lastname}" for="lastname" />
+                        <p:inputText id="lastname" value="#{userController.selected.lastname}" title="#{bundle.EditUserTitle_lastname}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_lastname}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{userController.selected.phone}" title="#{bundle.EditUserTitle_phone}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_phone}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{userController.selected.email}" title="#{bundle.EditUserTitle_email}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.EditUserLabel_personTypeJPADescriminator}" for="personTypeJPADescriminator" />
+                        <p:inputText id="personTypeJPADescriminator" value="#{userController.selected.personTypeJPADescriminator}" title="#{bundle.EditUserTitle_personTypeJPADescriminator}" />
+                        <p:outputLabel value="#{bundle.EditUserLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{userController.selected.user}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserLabel_country}" for="country" />
+                        <p:selectOneMenu id="country" value="#{userController.selected.country}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_country}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{countryController.itemsAvailableSelectOne}"
+                                           var="countryItem"
+                                           itemValue="#{countryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserLabel_gender}" for="gender" />
+                        <p:selectOneMenu id="gender" value="#{userController.selected.gender}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_gender}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{genderController.itemsAvailableSelectOne}"
+                                           var="genderItem"
+                                           itemValue="#{genderItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

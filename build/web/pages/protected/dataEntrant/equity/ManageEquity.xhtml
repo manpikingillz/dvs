@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/pages/templates/Template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        <h:outputText value="Equity"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="newEquityForm">
+            <p:panel style="width: 30%; margin: auto; text-align: center">
+                <h:outputText value="#{equityController.selected.id gt 0 ? 'Edit Equity':'Register Equity'}" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+            </p:panel>
+
+            <p:spacer height="20px" width="0px"/>
+            <p:fieldset legend="#{equityController.selected.id gt 0 ? 'Edit Equity':'New Equity'}" toggleable="true">
+                <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel value="Name Of Equity:" for="nameOfSecurity" /></p:column>
+                    <p:column><p:inputText id="nameOfSecurity" value="#{equityController.selected.nameOfSecurity}" title="NameOfSecurity" required="true" requiredMessage="The NameOfSecurity field is required."/></p:column>
+                    <p:column rowspan="5"/>
+                    <p:column><p:outputLabel value="Reference Price:" for="referencePrice" /></p:column>
+                    <p:column><p:inputText id="referencePrice" value="#{equityController.selected.referencePrice}" title="ReferencePrice" required="true" requiredMessage="The ReferencePrice field is required."/></p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column><p:outputLabel value="Short Name:" for="shortName" /></p:column>
+                    <p:column><p:inputText id="shortName" value="#{equityController.selected.shortName}" title="ShortName" required="true" requiredMessage="The ShortName field is required."/></p:column>
+                    <p:column><p:outputLabel value="Quantity Issued:" for="quantityIssued" /></p:column>
+                    <p:column><p:inputText id="quantityIssued" value="#{equityController.selected.quantityIssued}" title="QuantityIssued" required="true" requiredMessage="The QuantityIssued field is required."/></p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column><p:outputLabel value="ISIN:" for="isin" /></p:column>
+                    <p:column><p:inputText id="isin" value="#{equityController.selected.isin}" title="Isin" required="true" requiredMessage="The Isin field is required."/></p:column>
+                    <p:column><p:outputLabel value="Date Added:" for="dateAdded" /></p:column>
+                    <p:column>
+                        <p:calendar id="dateAdded" value="#{equityController.selected.dateAdded}" title="DateAdded" required="true" requiredMessage="The DateAdded field is required.">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </p:calendar>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column><p:outputLabel value="Issuer Code:" for="issuerCode" /></p:column>
+                    <p:column><p:inputText id="issuerCode" value="#{equityController.selected.issuerCode}" title="IssuerCode" required="true" requiredMessage="The IssuerCode field is required."/></p:column>
+                    <p:column><p:outputLabel value="Country Of Initial Issue:" for="countryOfInitialIssue" /></p:column>
+                    <p:column>
+                        <p:selectOneMenu id="countryOfInitialIssue" value="#{equityController.selected.countryOfInitialIssue}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{countryController.items}"
+                                       var="country"
+                                       itemValue="#{country}"
+                                       itemLabel="#{country.countryName}"/>
+                    </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column></p:column>
+                    <p:column>
+                        <p:commandButton value="Save"  action="#{equityController.create()}" update=":newEquityDataListForm:datalist" rendered="#{equityController.selected.id gt 0 ? false:true}"/>
+                            <p:commandButton value="Update" action="#{equityController.update()}" update=":newEquityDataListForm:datalist" rendered="#{equityController.selected.id gt 0}"/>
+                            <p:commandButton value="New Equity" action="#{equityController.prepareCreate()}" ajax="false" immediate="true" update=":newEquityDatalistForm:datalist" rendered="#{equityController.selected.id gt 0}">
+                                <p:resetInput target="newEquityForm"/>
+                            </p:commandButton>
+                        </p:column>
+                    <p:column><p:outputLabel value="FHLimit:" for="FHLimit" /></p:column>
+                    <p:column><p:inputText id="FHLimit" value="#{equityController.selected.FHLimit}" title="FHLimit" required="true" requiredMessage="The FHLimit field is required."/></p:column> 
+                </p:row>
+                </p:panelGrid>
+            </p:fieldset>
+        </h:form>
+        <p:spacer height="20px" width="0px"/>
+        
+        <p:fieldset legend="List of Equities" toggleable="true" collapsed="true">
+                <h:form id="newEquityDataListForm">
+                    <p:dataTable id="datalist" value="#{equityController.items}" 
+                                 var="item"
+                                 selection="#{equityController.selected}"
+                                 selectionMode="single"
+                                 rowKey="#{item.id}"
+                                 draggableColumns="true"
+                                 resizableColumns="true"
+                                 >
+                         <p:ajax event="rowSelect" update=":newEquityForm deleteButton"/>
+
+                        <p:column width="4%">
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name Of Equity"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nameOfSecurity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Short Name"/>
+                            </f:facet>
+                            <h:outputText value="#{item.shortName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="ISIN"/>
+                            </f:facet>
+                            <h:outputText value="#{item.isin}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Issuer Code"/>
+                            </f:facet>
+                            <h:outputText value="#{item.issuerCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="FHLimit"/>
+                            </f:facet>
+                            <h:outputText value="#{item.FHLimit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Reference Price"/>
+                            </f:facet>
+                            <h:outputText value="#{item.referencePrice}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Quantity Issued"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quantityIssued}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date Added"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateAdded}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="CountryOfInitialIssue"/>
+                            </f:facet>
+                            <h:outputText value="#{item.countryOfInitialIssue.countryName}"/>
+                        </p:column>
+                         
+                         <f:facet name="footer">
+                        <p:commandButton id="deleteButton" value="Delete" action="#{equityController.destroy()}" update=":newEquityForm" disabled="#{equityController.selected.id gt 0 ?false:true}"/>
+                    </f:facet>
+                    </p:dataTable>
+                </h:form>
+        </p:fieldset>
+        
+    </ui:define>
+</ui:composition>
+

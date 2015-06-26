@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorTypeViewDlg" widgetVar="InvestorTypeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInvestorTypeTitle}">
+            <h:form id="InvestorTypeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorTypeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInvestorTypeLabel_id}"/>
+                        <h:outputText value="#{investorTypeController.selected.id}" title="#{bundle.ViewInvestorTypeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInvestorTypeLabel_personType}"/>
+                        <h:outputText value="#{investorTypeController.selected.personType}" title="#{bundle.ViewInvestorTypeTitle_personType}"/>
+                        <h:outputText value="#{bundle.ViewInvestorTypeLabel_autoTimestamp}"/>
+                        <h:outputText value="#{investorTypeController.selected.autoTimestamp}" title="#{bundle.ViewInvestorTypeTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('InvestorTypeViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/pages/templates/Template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Investor Type"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <p:panel style="width: 30%; margin: auto; text-align: center">
+                <h:outputText value="Investor Type" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+            </p:panel>
+            
+            <p:spacer height="20px" width="0px"/>
+            <h:form id="InvestorTypeListForm">
+                <p:panel>
+                    <p:dataTable id="datalist" value="#{investorTypeController.items}" var="item"
+                                 selectionMode="single" selection="#{investorTypeController.selected}"
+                                 rowKey="#{item.id}"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton  editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton  editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Investor Type"/>
+                            </f:facet>
+                            <h:outputText value="#{item.personType}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{investorTypeController.prepareCreate}" update=":InvestorTypeCreateForm" oncomplete="PF('InvestorTypeCreateDialog').show()"/>
+                            <!--<p:commandButton id="viewButton"   icon="ui-icon-search" value="#//{bundle.View}" update=":InvestorTypeViewForm" oncomplete="PF('InvestorTypeViewDialog').show()" disabled="#//{empty investorTypeController.selected}"/>-->
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InvestorTypeEditForm" oncomplete="PF('InvestorTypeEditDialog').show()" disabled="#{empty investorTypeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{investorTypeController.destroy}" update=":growl,datalist" disabled="#{empty investorTypeController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="/pages/protected/administrator/lookups/investorType/Create.xhtml"/>
+            <ui:include src="/pages/protected/administrator/lookups/investorType/Edit.xhtml"/>
+            <ui:include src="/pages/protected/administrator/lookups/investorType/View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

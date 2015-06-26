@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListInvestorRequestedDataTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="InvestorRequestedDataListForm">
+                <p:panel header="#{bundle.ListInvestorRequestedDataTitle}">
+                    <p:dataTable id="datalist" value="#{investorRequestedDataController.items}" var="item"
+                                 selectionMode="single" selection="#{investorRequestedDataController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvestorRequestedDataTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvestorRequestedDataTitle_activeStatus}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.activeStatus}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvestorRequestedDataTitle_requestDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.requestDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvestorRequestedDataTitle_autoTimestamp}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.autoTimestamp}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvestorRequestedDataTitle_investorGeneralDataRequest}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.investorGeneralDataRequest}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvestorRequestedDataTitle_TYPEOFDATATOSELLhasDATADURATIONCATEGORY}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.TYPEOFDATATOSELLhasDATADURATIONCATEGORY}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{investorRequestedDataController.prepareCreate}" update=":InvestorRequestedDataCreateForm" oncomplete="PF('InvestorRequestedDataCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":InvestorRequestedDataViewForm" oncomplete="PF('InvestorRequestedDataViewDialog').show()" disabled="#{empty investorRequestedDataController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InvestorRequestedDataEditForm" oncomplete="PF('InvestorRequestedDataEditDialog').show()" disabled="#{empty investorRequestedDataController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{investorRequestedDataController.destroy}" update=":growl,datalist" disabled="#{empty investorRequestedDataController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

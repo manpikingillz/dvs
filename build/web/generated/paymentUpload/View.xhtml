@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaymentUploadViewDlg" widgetVar="PaymentUploadViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPaymentUploadTitle}">
+            <h:form id="PaymentUploadViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paymentUploadController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPaymentUploadLabel_id}"/>
+                        <h:outputText value="#{paymentUploadController.selected.id}" title="#{bundle.ViewPaymentUploadTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPaymentUploadLabel_paymentUploadName}"/>
+                        <h:outputText value="#{paymentUploadController.selected.paymentUploadName}" title="#{bundle.ViewPaymentUploadTitle_paymentUploadName}"/>
+                        <h:outputText value="#{bundle.ViewPaymentUploadLabel_upload}"/>
+                        <h:outputText value="#{paymentUploadController.selected.upload}" title="#{bundle.ViewPaymentUploadTitle_upload}"/>
+                        <h:outputText value="#{bundle.ViewPaymentUploadLabel_uploadPath}"/>
+                        <h:outputText value="#{paymentUploadController.selected.uploadPath}" title="#{bundle.ViewPaymentUploadTitle_uploadPath}"/>
+                        <h:outputText value="#{bundle.ViewPaymentUploadLabel_autoTimestamp}"/>
+                        <h:outputText value="#{paymentUploadController.selected.autoTimestamp}" title="#{bundle.ViewPaymentUploadTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPaymentUploadLabel_investorDataPaymentDetail}"/>
+                        <h:outputText value="#{paymentUploadController.selected.investorDataPaymentDetail}" title="#{bundle.ViewPaymentUploadTitle_investorDataPaymentDetail}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PaymentUploadViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

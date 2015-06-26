@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BondEditDlg" widgetVar="BondEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBondTitle}">
+            <h:form id="BondEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bondController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBondLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bondController.selected.id}" title="#{bundle.EditBondTitle_id}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_issuerCode}" for="issuerCode" />
+                        <p:inputText id="issuerCode" value="#{bondController.selected.issuerCode}" title="#{bundle.EditBondTitle_issuerCode}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_issuerCode}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_isin}" for="isin" />
+                        <p:inputText id="isin" value="#{bondController.selected.isin}" title="#{bundle.EditBondTitle_isin}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_isin}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_shortName}" for="shortName" />
+                        <p:inputText id="shortName" value="#{bondController.selected.shortName}" title="#{bundle.EditBondTitle_shortName}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_shortName}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_parValue}" for="parValue" />
+                        <p:inputText id="parValue" value="#{bondController.selected.parValue}" title="#{bundle.EditBondTitle_parValue}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_parValue}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_quantityIssued}" for="quantityIssued" />
+                        <p:inputText id="quantityIssued" value="#{bondController.selected.quantityIssued}" title="#{bundle.EditBondTitle_quantityIssued}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_quantityIssued}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_dateIssued}" for="dateIssued" />
+                        <p:calendar id="dateIssued" pattern="MM/dd/yyyy" value="#{bondController.selected.dateIssued}" title="#{bundle.EditBondTitle_dateIssued}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_dateIssued}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_dateExpire}" for="dateExpire" />
+                        <p:calendar id="dateExpire" pattern="MM/dd/yyyy" value="#{bondController.selected.dateExpire}" title="#{bundle.EditBondTitle_dateExpire}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_dateExpire}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_couponRate}" for="couponRate" />
+                        <p:inputText id="couponRate" value="#{bondController.selected.couponRate}" title="#{bundle.EditBondTitle_couponRate}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_couponRate}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_dateFirstCoupon}" for="dateFirstCoupon" />
+                        <p:calendar id="dateFirstCoupon" pattern="MM/dd/yyyy" value="#{bondController.selected.dateFirstCoupon}" title="#{bundle.EditBondTitle_dateFirstCoupon}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_dateFirstCoupon}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_dateFinalCoupon}" for="dateFinalCoupon" />
+                        <p:calendar id="dateFinalCoupon" pattern="MM/dd/yyyy" value="#{bondController.selected.dateFinalCoupon}" title="#{bundle.EditBondTitle_dateFinalCoupon}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_dateFinalCoupon}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_term}" for="term" />
+                        <p:inputText id="term" value="#{bondController.selected.term}" title="#{bundle.EditBondTitle_term}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_term}"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{bondController.selected.autoTimestamp}" title="#{bundle.EditBondTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBondLabel_bondType}" for="bondType" />
+                        <p:selectOneMenu id="bondType" value="#{bondController.selected.bondType}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_bondType}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bondTypeController.itemsAvailableSelectOne}"
+                                           var="bondTypeItem"
+                                           itemValue="#{bondTypeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditBondLabel_currencyType}" for="currencyType" />
+                        <p:selectOneMenu id="currencyType" value="#{bondController.selected.currencyType}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_currencyType}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{currencyTypeController.itemsAvailableSelectOne}"
+                                           var="currencyTypeItem"
+                                           itemValue="#{currencyTypeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditBondLabel_countryOfInitialIssue}" for="countryOfInitialIssue" />
+                        <p:selectOneMenu id="countryOfInitialIssue" value="#{bondController.selected.countryOfInitialIssue}" required="true" requiredMessage="#{bundle.EditBondRequiredMessage_countryOfInitialIssue}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{countryController.itemsAvailableSelectOne}"
+                                           var="countryOfInitialIssueItem"
+                                           itemValue="#{countryOfInitialIssueItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bondController.update}" value="#{bundle.Save}" update="display,:BondListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BondEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BondEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

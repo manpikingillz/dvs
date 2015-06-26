@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserTitle}">
+            <h:form id="UserCreateForm">
+                <h:panelGroup id="display">
+                    <h:panelGroup layout="block" style="display: inline-block; vertical-align: middle">
+                        <p:panel>
+                            <h:panelGrid columns="2" >
+                                <p:outputLabel value="#{bundle.CreateUserLabel_surname}" for="surname" />
+                                <p:inputText id="surname" value="#{employeeController.selected.surname}" title="#{bundle.CreateUserTitle_surname}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_surname}"/>
+                                <p:outputLabel value="#{bundle.CreateUserLabel_lastname}" for="lastname" />
+                                <p:inputText id="lastname" value="#{employeeController.selected.lastname}" title="#{bundle.CreateUserTitle_lastname}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_lastname}"/>
+                                <p:outputLabel value="#{bundle.CreateUserLabel_gender}" for="gender" />
+                                <p:selectOneMenu id="gender" value="#{employeeController.selected.gender}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_gender}">
+                                    <f:selectItems value="#{genderController.itemsAvailableSelectOne}"
+                                                   var="genderItem"
+                                                   itemValue="#{genderItem}" itemLabel="#{genderItem.gender}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateUserLabel_phone}" for="phone" />
+                                <p:inputText id="phone" value="#{employeeController.selected.phone}" title="#{bundle.CreateUserTitle_phone}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_phone}"/>
+                                <p:outputLabel value="#{bundle.CreateUserLabel_email}" for="email" />
+                                <p:inputText id="email" value="#{employeeController.selected.email}" title="#{bundle.CreateUserTitle_email}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_email}"/>
+                                <p:outputLabel value="#{bundle.CreateUserLabel_country}" for="country" />
+                                <p:selectOneMenu id="country" value="#{employeeController.selected.country}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_country}">
+                                    <f:selectItems value="#{countryController.itemsAvailableSelectOne}"
+                                                   var="countryItem"
+                                                   itemValue="#{countryItem}" itemLabel="#{countryItem.countryName}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateUserLabel_username}" for="username" />
+                                <p:inputText id="username" value="#{employeeController.selected.username}" title="#{bundle.CreateUserTitle_username}" />
+                                <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
+                                <p:password id="password" value="#{employeeController.selected.password}" title="#{bundle.CreateUserTitle_password}" converter="ug.or.use.dvs.util.SHAConverter" />
+                                <p:outputLabel value="Enabled" for="enabledOrDisabled" />
+                                <p:selectBooleanCheckbox id="enabledOrDisabled" value="#{employeeController.selected.enabledOrDisabled}" />
+
+                                <p:outputLabel value="#{bundle.CreateEmployeeLabel_employeeNumber}" for="employeeNumber" />
+                                <p:inputText id="employeeNumber" value="#{employeeController.selected.employeeNumber}" title="#{bundle.CreateEmployeeTitle_employeeNumber}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_employeeNumber}"/>
+
+                                <p:outputLabel value="#{bundle.CreateEmployeeLabel_jobtitle}" for="jobtitle" />
+                                <p:selectOneMenu id="jobtitle" value="#{employeeController.selected.jobtitle}" required="true" requiredMessage="#{bundle.EditEmployeeRequiredMessage_jobtitle}">
+                                    <f:selectItems value="#{jobtitleController.itemsAvailableSelectOne}"
+                                                   var="jobtitleItem"
+                                                   itemValue="#{jobtitleItem}" itemLabel="#{jobtitleItem.jobtitle}"/>
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:commandButton actionListener="#{employeeController.create}" value="#{bundle.Save}" update="display,:usersTabView:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserCreateDialog').hide()"/>
+                    </h:panelGroup>
+
+                    <p:spacer width="10px" height="0px"/>     
+
+                    <h:panelGroup layout="block" style="display: inline-block; vertical-align: middle">
+                        <p:panel>
+                            <h:panelGrid columns="2" >
+
+                                <p:outputLabel value="Roles" for="userRoles" />
+                                <p:selectManyMenu id="userRoles" value="#{employeeController.selected.userGroupCollection}" showCheckbox="true" converter="userGroupControllerConverter" >
+                                    <f:selectItems value="#{userGroupController.items}" 
+                                                   var="group" 
+                                                   itemValue="#{group}"
+                                                   itemLabel="#{group.groupname}"
+
+                                                   />
+                                </p:selectManyMenu>
+
+                                <p:outputLabel value="Instruments" for="instruments" />
+                                <p:selectManyMenu id="instruments" value="#{employeeController.selected.instrumentCollection}" showCheckbox="true" converter="instrumentControllerConverter" >
+                                    <f:selectItems value="#{instrumentController.items}" 
+                                                   var="item" 
+                                                   itemValue="#{item}"
+                                                   itemLabel="#{item.instrumentName}"
+
+                                                   />
+                                </p:selectManyMenu>
+
+                            </h:panelGrid>
+                        </p:panel> 
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

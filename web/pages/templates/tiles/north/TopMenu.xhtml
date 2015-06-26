@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <h:form id="menuForm">
+<!--            <p:toolbar>
+
+                <p:toolbarGroup align="left">
+                    <p:commandButton type="push" value="New" image="ui-icon-document"  />
+                    <p:commandButton type="push" value="Open" image="ui-icon-folder-open"/>
+                    <p:separator />
+                    <p:commandButton type="push" title="Save" image="ui-icon-disk"/>
+                    <p:commandButton type="push" title="Delete" image="ui-icon-trash"/>
+                    <p:commandButton type="push" title="Print" image="ui-icon-print"/>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+                    <p:menuButton value="Navigate">
+                        <p:menuitem value="Home" url="#" />
+                        <p:menuitem value="Logout" url="#" />
+                    </p:menuButton>
+                </p:toolbarGroup>
+            </p:toolbar
+            -->
+            <p:menubar>
+                <p:submenu label="Administration" rendered="#{request.isUserInRole('Administrator')}">
+                    <p:menuitem value="Manage Users" outcome="/pages/protected/administrator/manageUser/user/List"/> 
+
+                    <p:submenu label="Lookups">
+                        <p:menuitem value="Bond" rendered="false" outcome="/pages/bond/List.xhtml"  />
+                        <p:menuitem value="BondDailyPrice" rendered="false" outcome="/pages/bondDailyPrice/List.xhtml" />
+                        <p:menuitem value="Bond Type" rendered="true" outcome="/pages/protected/administrator/lookups/bondType/List.xhtml" />
+                        <p:menuitem value="Country" rendered="true" outcome="/pages/protected/administrator/lookups/country/List.xhtml" />
+                        <p:menuitem value="Currency Type" rendered="true" outcome="/pages/protected/administrator/lookups/currencyType/List.xhtml" />
+                        <p:menuitem value="Data Duration Category" rendered="true" outcome="/pages/protected/administrator/lookups/dataDurationCategory/List.xhtml" />
+                        <p:menuitem value="Employee" rendered="false" outcome="/pages/employee/List.xhtml" />
+                        <p:menuitem value="EmployeeIsAssignedToInstrument" rendered="false" outcome="/pages/employeeIsAssignedToInstrument/List.xhtml" />
+                        <p:menuitem value="Equity" rendered="false" outcome="/pages/equity/List.xhtml" />
+                        <p:menuitem value="EquityDailyPrice" rendered="false" outcome="/pages/equityDailyPrice/List.xhtml" />
+                        <p:menuitem value="EquityMarketDay" rendered="false" outcome="/pages/equityMarketDay/List.xhtml" />
+                        <p:menuitem value="Gender" rendered="true" outcome="/pages/protected/administrator/lookups/gender/List.xhtml" />
+                        <p:menuitem value="User Group" rendered="false" outcome="/pages/protected/administrator/lookups/userGroup/List.xhtml" />
+                        <p:menuitem value="Instrument" rendered="true" outcome="/pages/protected/administrator/lookups/instrument/List.xhtml" />
+                        <p:menuitem value="Investor" rendered="false" outcome="/pages/investor/List.xhtml" />
+                        <p:menuitem value="InvestorDataPaymentDetail" rendered="false" outcome="/pages/investorDataPaymentDetail/List.xhtml" />
+                        <p:menuitem value="InvestorGeneralDataRequest" rendered="false" outcome="/pages/investorGeneralDataRequest/List.xhtml" />
+                        <p:menuitem value="InvestorRequestedData" rendered="false" outcome="/pages/investorRequestedData/List.xhtml" />
+                        <p:menuitem value="InvestorType" outcome="/pages/protected/administrator/lookups/investorType/List.xhtml" />
+                        <p:menuitem value="Jobtitle" rendered="true" outcome="/pages/protected/administrator/lookups/jobtitle/List.xhtml" />
+                        <p:menuitem value="PaymentUpload" rendered="false" outcome="/pages/paymentUpload/List.xhtml" />
+                        <p:menuitem value="Person" rendered="false" outcome="/pages/person/List.xhtml" />
+                        <p:menuitem value="TYPEOFDATATOSELLhasDATADURATIONCATEGORY" rendered="false" outcome="/pages/tYPEOFDATATOSELLhasDATADURATIONCATEGORY/List.xhtml" />
+                        <p:menuitem value="Type Of Data To Sell" rendered="true" outcome="/pages/protected/administrator/lookups/typeOfDataToSell/List.xhtml" />
+                        <p:menuitem value="User" rendered="false" outcome="/pages/user/List.xhtml" />
+
+                    </p:submenu>
+                </p:submenu>
+                <p:submenu label="Investor Payments" rendered="#{request.isUserInRole('Administrator')}">
+                    <p:menuitem value="Payment Status" />
+                </p:submenu>
+
+                <p:submenu  label="Investor  Data" rendered="#{request.isUserInRole('Administrator')}">
+                    <p:menuitem value="Activate Data" />
+                    <p:menuitem value="View Data Requests" outcome="/pages/protected/administrator/ViewDataRequests" />
+                </p:submenu>
+
+                <p:submenu  label="Data Settings" rendered="#{request.isUserInRole('Administrator')}">
+                    <p:menuitem value="Data Price" outcome="/pages/protected/administrator/ConfigureDataPrice"/>
+                    <p:menuitem value="New and historical Data" />
+                    <p:menuitem value="Upload Data" />
+                    <p:menuitem value="Generated Data" />
+                </p:submenu>
+
+                <p:submenu  label="Equities" rendered="#{request.isUserInRole('DataEntrant')}">
+                    <p:menuitem value="New / Edit / Delete equity" outcome="/pages/protected/dataEntrant/equity/ManageEquity.xhtml" />
+                    <p:menuitem value="Equity Daily Price " outcome="/pages/protected/dataEntrant/equity/EquityDailyPrice.xhtml"/>
+                </p:submenu>
+
+                <p:submenu  label="Bonds" rendered="#{request.isUserInRole('DataEntrant')}">
+                    <p:menuitem value="New / Edit / Delete Bonds" outcome="/pages/protected/dataEntrant/bond/ManageBond.xhtml" />
+                    <p:menuitem value="Bond Daily Price " outcome="/pages/protected/dataEntrant/bond/BondDailyPrice.xhtml"/>
+                </p:submenu>
+
+                <p:menuitem value="Subscribe for Data" rendered="#{request.isUserInRole('Investor') }" outcome="/pages/protected/investor/subscribeForData" />
+                <p:menuitem value="View Active Data" rendered="#{request.isUserInRole('Investor')}" outcome="/pages/protected/investor/viewActiveData"/>
+
+                <p:menuitem value="Payment Details" rendered="#{request.isUserInRole('Investor')}" outcome="/pages/protected/investor/PaymentDetails"/>
+
+                <p:menuitem value="My Profile"/>
+
+                <p:submenu  label="Search" rendered="#{request.isUserInRole('DataEntrant')}">
+                    <p:menuitem value="Search Bond" />
+                    <p:menuitem value="Search Equity"/>
+                </p:submenu>
+
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorDataPaymentDetailViewDlg" widgetVar="InvestorDataPaymentDetailViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInvestorDataPaymentDetailTitle}">
+            <h:form id="InvestorDataPaymentDetailViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorDataPaymentDetailController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_id}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.id}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_dateOfPayment}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.dateOfPayment}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_dateOfPayment}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_amountPaid}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.amountPaid}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_amountPaid}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_paymentSlipNumber}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.paymentSlipNumber}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_paymentSlipNumber}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_paymentSlipAttachment}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.paymentSlipAttachment}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_paymentSlipAttachment}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_bank}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.bank}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_bank}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_bankBranch}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.bankBranch}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_bankBranch}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_autoTimestamp}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.autoTimestamp}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_branchCountry}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.branchCountry}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_branchCountry}"/>
+                        <h:outputText value="#{bundle.ViewInvestorDataPaymentDetailLabel_investorGeneralDataRequest}"/>
+                        <h:outputText value="#{investorDataPaymentDetailController.selected.investorGeneralDataRequest}" title="#{bundle.ViewInvestorDataPaymentDetailTitle_investorGeneralDataRequest}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InvestorDataPaymentDetailViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/pages/templates/Template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Configure Data Price"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <p:panel style="width: 30%; margin: auto; text-align: center">
+            <h:outputText value="Configure data price" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+        </p:panel>
+        <h:form id="configureDataPriceForm">
+            <p:selectOneButton id="configureDataPriceSecurity">
+                <f:selectItems value="#{instrumentController.items}"
+                               var="item"
+                               itemValue="#{item}"
+                               itemLabel="#{item.instrumentName}"/>
+
+            </p:selectOneButton>
+            <p:spacer height="20px" width="0px"/>  
+            <p:panel>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Category Of Data:" for="typeOfDataToSell" />
+                    <p:panel>
+                        <p:selectOneRadio id="typeOfDataToSell" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.typeOfDataToSell}" required="true" requiredMessage="The TypeOfDataToSell field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{typeOfDataToSellController.items}"
+                                           var="item"
+                                           itemValue="#{item}"
+                                           itemLabel="#{item.typeOfDataToSell}"/>
+                        </p:selectOneRadio>
+                    </p:panel>
+                    <p:outputLabel value="Data Duration:" for="dataDurationCategory" />
+                    <p:panel>
+                        <p:selectOneRadio id="dataDurationCategory" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.dataDurationCategory}" required="true" requiredMessage="The DataDurationCategory field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{dataDurationCategoryController.items}"
+                                           var="item"
+                                           itemValue="#{item}"
+                                           itemLabel="#{item.dataDurationCategory}"/>
+                        </p:selectOneRadio>
+                    </p:panel>
+                    <p:outputLabel value="Price:" for="price" />
+                    <p:inputText id="price" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.price}" title="Price"/>
+                    <p:outputLabel value="Description:" for="remarks" />
+                    <p:inputTextarea id="remarks" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected.remarks}" title="Remarks" />
+                </h:panelGrid>
+            </p:panel>
+            <p:commandButton value="Save" update=":configureDataPriceListForm:dataPriceList" action="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.create()}"/>
+            <p:commandButton value="Refresh" process="@this" update=":configureDataPriceForm" action="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.prepareCreate()}"/>
+        </h:form>
+
+        <p:spacer height="20px" width="0px"/>   
+
+        <h:form id="configureDataPriceListForm">
+
+            <p:dataTable id="dataPriceList" value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.items}" 
+                         var="item"
+                         selection="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.selected}"
+                         selectionMode="single"
+                         rowKey="#{item.id}"
+                         >
+
+                <p:ajax event="rowSelect" update=":configureDataPriceForm"/>
+
+                <p:columnGroup type="header">
+                    <p:row>
+                        <p:column headerText="Category Of Data" rowspan="2"/>
+                        <p:column headerText="Duration Of Data" colspan="2"/>
+                    </p:row>
+                    <p:row>
+                        <p:column headerText="Historical Data" />
+                        <p:column headerText="Current Data" />
+                    </p:row>
+                </p:columnGroup>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="TypeOfDataToSell"/>
+                    </f:facet>
+                    <h:outputText value="#{item.typeOfDataToSell.typeOfDataToSell}"/>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="DataDurationCategory"/>
+                    </f:facet>
+                    <h:outputText value="#{item.price}"/>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Price"/>
+                    </f:facet>
+                    <h:outputText value="#{item.price}"/>
+                </p:column>
+
+
+                <f:facet name="footer">
+                    <p:commandButton value="#{bundle.Delete}" action="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.destroy()}" update="dataPriceList"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+

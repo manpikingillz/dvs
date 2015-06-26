@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquityDailyPriceViewDlg" widgetVar="EquityDailyPriceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEquityDailyPriceTitle}">
+            <h:form id="EquityDailyPriceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equityDailyPriceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_id}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.id}" title="#{bundle.ViewEquityDailyPriceTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_sharesTraded}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.sharesTraded}" title="#{bundle.ViewEquityDailyPriceTitle_sharesTraded}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_turnOver}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.turnOver}" title="#{bundle.ViewEquityDailyPriceTitle_turnOver}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_vwap}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.vwap}" title="#{bundle.ViewEquityDailyPriceTitle_vwap}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_low}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.low}" title="#{bundle.ViewEquityDailyPriceTitle_low}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_high}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.high}" title="#{bundle.ViewEquityDailyPriceTitle_high}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_outstandingBid}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.outstandingBid}" title="#{bundle.ViewEquityDailyPriceTitle_outstandingBid}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_outstandingOffer}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.outstandingOffer}" title="#{bundle.ViewEquityDailyPriceTitle_outstandingOffer}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_PERatio}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.PERatio}" title="#{bundle.ViewEquityDailyPriceTitle_PERatio}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_marketCap}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.marketCap}" title="#{bundle.ViewEquityDailyPriceTitle_marketCap}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_autoTimestamp}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.autoTimestamp}" title="#{bundle.ViewEquityDailyPriceTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_equityMarketDay}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.equityMarketDay}" title="#{bundle.ViewEquityDailyPriceTitle_equityMarketDay}"/>
+                        <h:outputText value="#{bundle.ViewEquityDailyPriceLabel_equity}"/>
+                        <h:outputText value="#{equityDailyPriceController.selected.equity}" title="#{bundle.ViewEquityDailyPriceTitle_equity}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EquityDailyPriceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

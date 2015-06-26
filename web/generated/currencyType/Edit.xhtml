@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CurrencyTypeEditDlg" widgetVar="CurrencyTypeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCurrencyTypeTitle}">
+            <h:form id="CurrencyTypeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{currencyTypeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCurrencyTypeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{currencyTypeController.selected.id}" title="#{bundle.EditCurrencyTypeTitle_id}" required="true" requiredMessage="#{bundle.EditCurrencyTypeRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditCurrencyTypeLabel_currencyTypeShortName}" for="currencyTypeShortName" />
+                        <p:inputText id="currencyTypeShortName" value="#{currencyTypeController.selected.currencyTypeShortName}" title="#{bundle.EditCurrencyTypeTitle_currencyTypeShortName}" required="true" requiredMessage="#{bundle.EditCurrencyTypeRequiredMessage_currencyTypeShortName}"/>
+                        <p:outputLabel value="#{bundle.EditCurrencyTypeLabel_currencyTypeLongName}" for="currencyTypeLongName" />
+                        <p:inputText id="currencyTypeLongName" value="#{currencyTypeController.selected.currencyTypeLongName}" title="#{bundle.EditCurrencyTypeTitle_currencyTypeLongName}" />
+                        <p:outputLabel value="#{bundle.EditCurrencyTypeLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{currencyTypeController.selected.autoTimestamp}" title="#{bundle.EditCurrencyTypeTitle_autoTimestamp}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{currencyTypeController.update}" value="#{bundle.Save}" update="display,:CurrencyTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CurrencyTypeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CurrencyTypeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorGeneralDataRequestCreateDlg" widgetVar="InvestorGeneralDataRequestCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInvestorGeneralDataRequestTitle}">
+            <h:form id="InvestorGeneralDataRequestCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorGeneralDataRequestController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInvestorGeneralDataRequestLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{investorGeneralDataRequestController.selected.id}" title="#{bundle.CreateInvestorGeneralDataRequestTitle_id}" required="true" requiredMessage="#{bundle.CreateInvestorGeneralDataRequestRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorGeneralDataRequestLabel_requestDate}" for="requestDate" />
+                        <p:calendar id="requestDate" pattern="MM/dd/yyyy" value="#{investorGeneralDataRequestController.selected.requestDate}" title="#{bundle.EditInvestorGeneralDataRequestTitle_requestDate}" required="true" requiredMessage="#{bundle.EditInvestorGeneralDataRequestRequiredMessage_requestDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorGeneralDataRequestLabel_amount}" for="amount" />
+                        <p:inputText id="amount" value="#{investorGeneralDataRequestController.selected.amount}" title="#{bundle.CreateInvestorGeneralDataRequestTitle_amount}" required="true" requiredMessage="#{bundle.CreateInvestorGeneralDataRequestRequiredMessage_amount}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorGeneralDataRequestLabel_activeStatus}" for="activeStatus" />
+                        <p:selectBooleanCheckbox id="activeStatus" value="#{investorGeneralDataRequestController.selected.activeStatus}" />
+                        <p:outputLabel value="#{bundle.CreateInvestorGeneralDataRequestLabel_person}" for="person" />
+                        <p:inputText id="person" value="#{investorGeneralDataRequestController.selected.person}" title="#{bundle.CreateInvestorGeneralDataRequestTitle_person}" required="true" requiredMessage="#{bundle.CreateInvestorGeneralDataRequestRequiredMessage_person}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorGeneralDataRequestLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{investorGeneralDataRequestController.selected.autoTimestamp}" title="#{bundle.EditInvestorGeneralDataRequestTitle_autoTimestamp}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{investorGeneralDataRequestController.create}" value="#{bundle.Save}" update="display,:InvestorGeneralDataRequestListForm:datalist,:growl" oncomplete="handleSubmit(args,'InvestorGeneralDataRequestCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InvestorGeneralDataRequestCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

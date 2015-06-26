@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserGroupCreateDlg" widgetVar="UserGroupCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserGroupTitle}">
+            <h:form id="UserGroupCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userGroupController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUserGroupLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userGroupController.selected.id}" title="#{bundle.CreateUserGroupTitle_id}" required="true" requiredMessage="#{bundle.CreateUserGroupRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateUserGroupLabel_groupname}" for="groupname" />
+                        <p:inputText id="groupname" value="#{userGroupController.selected.groupname}" title="#{bundle.CreateUserGroupTitle_groupname}" required="true" requiredMessage="#{bundle.CreateUserGroupRequiredMessage_groupname}"/>
+                        <p:outputLabel value="#{bundle.CreateUserGroupLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{userGroupController.selected.autoTimestamp}" title="#{bundle.EditUserGroupTitle_autoTimestamp}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userGroupController.create}" value="#{bundle.Save}" update="display,:UserGroupListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserGroupCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserGroupCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

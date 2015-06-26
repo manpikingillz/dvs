@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/pages/templates/Template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="View Data Requests"/>
+    </ui:define>
+    <ui:define name="body">
+        <p:panel style="width: 30%; margin: auto; text-align: center">
+            <h:outputText value="Data requests" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+        </p:panel>
+
+        <p:spacer height="20px" width="0px"/>
+        <h:form>
+            <p:dataTable value="#{investorGeneralDataRequestController.items}" 
+                         var="item"
+                         >
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Client"/>
+                    </f:facet>
+                    <h:outputText value="#{item.personId.surname.concat(' ').concat(item.personId.lastname)}"/>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="RequestDate"/>
+                    </f:facet>
+                    <h:outputText value="#{item.requestDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Amount"/>
+                    </f:facet>
+                    <h:outputText value="#{item.amount}"/>
+                </p:column>
+
+                <p:column rendered="false">
+                    <p:orderList>
+                        <f:selectItems value="#{item.investorRequestedDataCollection}"
+                                       var="data"
+                                       itemLabel="#{data}"/>
+                    </p:orderList>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="PaymentStatus"/>
+                    </f:facet>
+                    <h:outputText value="#{item.paymentStatus eq false?'Not paid':'Paid'}" style="color:#{item.paymentStatus eq false?'red':'green'}!important; font-weight: bold"/>
+                </p:column>
+
+                <p:column>
+                    <p:commandButton icon="#{item.paymentStatus eq true?'ui-icon-circle-check':''}" value="#{item.activeStatus eq false? 'Click to Approve':'Approved'}" style="color: #{item.activeStatus eq true?'green':''}!important"/>
+                </p:column>
+
+
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquityViewDlg" widgetVar="EquityViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEquityTitle}">
+            <h:form id="EquityViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equityController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEquityLabel_id}"/>
+                        <h:outputText value="#{equityController.selected.id}" title="#{bundle.ViewEquityTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_nameOfSecurity}"/>
+                        <h:outputText value="#{equityController.selected.nameOfSecurity}" title="#{bundle.ViewEquityTitle_nameOfSecurity}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_shortName}"/>
+                        <h:outputText value="#{equityController.selected.shortName}" title="#{bundle.ViewEquityTitle_shortName}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_isin}"/>
+                        <h:outputText value="#{equityController.selected.isin}" title="#{bundle.ViewEquityTitle_isin}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_issuerCode}"/>
+                        <h:outputText value="#{equityController.selected.issuerCode}" title="#{bundle.ViewEquityTitle_issuerCode}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_FHLimit}"/>
+                        <h:outputText value="#{equityController.selected.FHLimit}" title="#{bundle.ViewEquityTitle_FHLimit}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_referencePrice}"/>
+                        <h:outputText value="#{equityController.selected.referencePrice}" title="#{bundle.ViewEquityTitle_referencePrice}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_quantityIssued}"/>
+                        <h:outputText value="#{equityController.selected.quantityIssued}" title="#{bundle.ViewEquityTitle_quantityIssued}"/>
+                        <h:outputText value="#{bundle.ViewEquityLabel_dateAdded}"/>
+                        <h:outputText value="#{equityController.selected.dateAdded}" title="#{bundle.ViewEquityTitle_dateAdded}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEquityLabel_autoTimestamp}"/>
+                        <h:outputText value="#{equityController.selected.autoTimestamp}" title="#{bundle.ViewEquityTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEquityLabel_countryOfInitialIssue}"/>
+                        <h:outputText value="#{equityController.selected.countryOfInitialIssue}" title="#{bundle.ViewEquityTitle_countryOfInitialIssue}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EquityViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

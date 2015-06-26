@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/pages/templates/Template.xhtml"
+                >
+    <ui:define name="title">
+        <h:outputText value="ALSI"/>
+    </ui:define>
+    <ui:define name="body">
+        <f:view>
+            <p:panel style="width: 30%; margin: auto; text-align: center">
+                <h:outputText value="Payment Details" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+            </p:panel>
+            <p:spacer height="10px" width="0px"/>
+            <p:panel>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Which Data Subscription are you paying for ?:" for="investorGeneralDataRequest" />
+                        <p:selectOneMenu id="investorGeneralDataRequest" value="#{investorDataPaymentDetailController.selected.investorGeneralDataRequest}"  required="true" requiredMessage="The InvestorGeneralDataRequest field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{fixme}"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Date Of Payment:" for="dateOfPayment" />
+                        <p:calendar id="dateOfPayment" value="#{investorDataPaymentDetailController.selected.dateOfPayment}" title="DateOfPayment" required="true" requiredMessage="The DateOfPayment field is required.">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </p:calendar>
+                        <h:outputLabel value="Amount Paid:" for="amountPaid" />
+                        <p:inputText id="amountPaid" value="#{investorDataPaymentDetailController.selected.amountPaid}" title="AmountPaid" required="true" requiredMessage="The AmountPaid field is required."/>
+                        <h:outputLabel value="Payment Slip Number:" for="paymentSlipNumber" />
+                        <p:inputText id="paymentSlipNumber" value="#{investorDataPaymentDetailController.selected.paymentSlipNumber}" title="PaymentSlipNumber" required="true" requiredMessage="The PaymentSlipNumber field is required."/>
+                        <h:outputLabel value="Bank:" for="bank" />
+                        <p:inputText id="bank" value="#{investorDataPaymentDetailController.selected.bank}" title="Bank" />
+                        <h:outputLabel value="Bank Branch:" for="bankBranch" />
+                        <p:inputText id="bankBranch" value="#{investorDataPaymentDetailController.selected.bankBranch}" title="BankBranch" />
+                        <h:outputLabel value="Branch Country:" for="branchCountry" />
+                        <p:selectOneMenu id="branchCountry" value="#{investorDataPaymentDetailController.selected.branchCountry}"  required="true" requiredMessage="The BranchCountry field is required.">
+                            <!-- TODO: update below reference to list of available items-->
+                            <f:selectItems value="#{countryController.items}"
+                                           var="item"
+                                           itemValue="#{item}"
+                                           itemLabel="#{item.countryName}"
+                                           />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Attach Payment Slip:" for="paymentSlipAttachment" />
+                        <p:fileUpload/>
+
+                    </h:panelGrid>
+                </h:form>
+            </p:panel>
+
+        </f:view>
+
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorRequestedDataCreateDlg" widgetVar="InvestorRequestedDataCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInvestorRequestedDataTitle}">
+            <h:form id="InvestorRequestedDataCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorRequestedDataController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInvestorRequestedDataLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{investorRequestedDataController.selected.id}" title="#{bundle.CreateInvestorRequestedDataTitle_id}" required="true" requiredMessage="#{bundle.CreateInvestorRequestedDataRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorRequestedDataLabel_activeStatus}" for="activeStatus" />
+                        <p:selectBooleanCheckbox id="activeStatus" value="#{investorRequestedDataController.selected.activeStatus}" />
+                        <p:outputLabel value="#{bundle.CreateInvestorRequestedDataLabel_requestDate}" for="requestDate" />
+                        <p:calendar id="requestDate" pattern="MM/dd/yyyy" value="#{investorRequestedDataController.selected.requestDate}" title="#{bundle.EditInvestorRequestedDataTitle_requestDate}" required="true" requiredMessage="#{bundle.EditInvestorRequestedDataRequiredMessage_requestDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorRequestedDataLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{investorRequestedDataController.selected.autoTimestamp}" title="#{bundle.EditInvestorRequestedDataTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorRequestedDataLabel_investorGeneralDataRequest}" for="investorGeneralDataRequest" />
+                        <p:selectOneMenu id="investorGeneralDataRequest" value="#{investorRequestedDataController.selected.investorGeneralDataRequest}" required="true" requiredMessage="#{bundle.EditInvestorRequestedDataRequiredMessage_investorGeneralDataRequest}">
+                            <f:selectItems value="#{investorGeneralDataRequestController.itemsAvailableSelectOne}"
+                                           var="investorGeneralDataRequestItem"
+                                           itemValue="#{investorGeneralDataRequestItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInvestorRequestedDataLabel_TYPEOFDATATOSELLhasDATADURATIONCATEGORY}" for="TYPEOFDATATOSELLhasDATADURATIONCATEGORY" />
+                        <p:selectOneMenu id="TYPEOFDATATOSELLhasDATADURATIONCATEGORY" value="#{investorRequestedDataController.selected.TYPEOFDATATOSELLhasDATADURATIONCATEGORY}" required="true" requiredMessage="#{bundle.EditInvestorRequestedDataRequiredMessage_TYPEOFDATATOSELLhasDATADURATIONCATEGORY}">
+                            <f:selectItems value="#{tYPEOFDATATOSELLhasDATADURATIONCATEGORYController.itemsAvailableSelectOne}"
+                                           var="TYPEOFDATATOSELLhasDATADURATIONCATEGORYItem"
+                                           itemValue="#{TYPEOFDATATOSELLhasDATADURATIONCATEGORYItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{investorRequestedDataController.create}" value="#{bundle.Save}" update="display,:InvestorRequestedDataListForm:datalist,:growl" oncomplete="handleSubmit(args,'InvestorRequestedDataCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InvestorRequestedDataCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

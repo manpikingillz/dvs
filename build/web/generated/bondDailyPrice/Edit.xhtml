@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BondDailyPriceEditDlg" widgetVar="BondDailyPriceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBondDailyPriceTitle}">
+            <h:form id="BondDailyPriceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bondDailyPriceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBondDailyPriceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bondDailyPriceController.selected.id}" title="#{bundle.EditBondDailyPriceTitle_id}" required="true" requiredMessage="#{bundle.EditBondDailyPriceRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditBondDailyPriceLabel_tradedYield}" for="tradedYield" />
+                        <p:inputText id="tradedYield" value="#{bondDailyPriceController.selected.tradedYield}" title="#{bundle.EditBondDailyPriceTitle_tradedYield}" />
+                        <p:outputLabel value="#{bundle.EditBondDailyPriceLabel_dirtyPrice}" for="dirtyPrice" />
+                        <p:inputText id="dirtyPrice" value="#{bondDailyPriceController.selected.dirtyPrice}" title="#{bundle.EditBondDailyPriceTitle_dirtyPrice}" />
+                        <p:outputLabel value="#{bundle.EditBondDailyPriceLabel_cleanPrice}" for="cleanPrice" />
+                        <p:inputText id="cleanPrice" value="#{bondDailyPriceController.selected.cleanPrice}" title="#{bundle.EditBondDailyPriceTitle_cleanPrice}" />
+                        <p:outputLabel value="#{bundle.EditBondDailyPriceLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{bondDailyPriceController.selected.autoTimestamp}" title="#{bundle.EditBondDailyPriceTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBondDailyPriceLabel_bond}" for="bond" />
+                        <p:selectOneMenu id="bond" value="#{bondDailyPriceController.selected.bond}" required="true" requiredMessage="#{bundle.EditBondDailyPriceRequiredMessage_bond}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bondController.itemsAvailableSelectOne}"
+                                           var="bondItem"
+                                           itemValue="#{bondItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bondDailyPriceController.update}" value="#{bundle.Save}" update="display,:BondDailyPriceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BondDailyPriceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BondDailyPriceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

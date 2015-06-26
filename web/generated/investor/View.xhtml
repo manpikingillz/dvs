@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorViewDlg" widgetVar="InvestorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInvestorTitle}">
+            <h:form id="InvestorViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInvestorLabel_personId}"/>
+                        <h:outputText value="#{investorController.selected.personId}" title="#{bundle.ViewInvestorTitle_personId}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_address}"/>
+                        <h:outputText value="#{investorController.selected.address}" title="#{bundle.ViewInvestorTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_autoTimestamp}"/>
+                        <h:outputText value="#{investorController.selected.autoTimestamp}" title="#{bundle.ViewInvestorTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_user}"/>
+                        <h:outputText value="#{investorController.selected.user}" title="#{bundle.ViewInvestorTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_investorType}"/>
+                        <h:outputText value="#{investorController.selected.investorType}" title="#{bundle.ViewInvestorTitle_investorType}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_personId}"/>
+                        <h:outputText value="#{investorController.selected.personId}" title="#{bundle.ViewInvestorTitle_personId}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_username}"/>
+                        <h:outputText value="#{investorController.selected.username}" title="#{bundle.ViewInvestorTitle_username}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_password}"/>
+                        <h:outputText value="#{investorController.selected.password}" title="#{bundle.ViewInvestorTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_autoTimestamp}"/>
+                        <h:outputText value="#{investorController.selected.autoTimestamp}" title="#{bundle.ViewInvestorTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_enabledOrDisabled}"/>
+                        <p:selectBooleanCheckbox value="#{investorController.selected.enabledOrDisabled}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_person}"/>
+                        <h:outputText value="#{investorController.selected.person}" title="#{bundle.ViewInvestorTitle_person}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_employee}"/>
+                        <h:outputText value="#{investorController.selected.employee}" title="#{bundle.ViewInvestorTitle_employee}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_investor}"/>
+                        <h:outputText value="#{investorController.selected.investor}" title="#{bundle.ViewInvestorTitle_investor}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_personId}"/>
+                        <h:outputText value="#{investorController.selected.personId}" title="#{bundle.ViewInvestorTitle_personId}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_surname}"/>
+                        <h:outputText value="#{investorController.selected.surname}" title="#{bundle.ViewInvestorTitle_surname}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_lastname}"/>
+                        <h:outputText value="#{investorController.selected.lastname}" title="#{bundle.ViewInvestorTitle_lastname}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_phone}"/>
+                        <h:outputText value="#{investorController.selected.phone}" title="#{bundle.ViewInvestorTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_email}"/>
+                        <h:outputText value="#{investorController.selected.email}" title="#{bundle.ViewInvestorTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_personTypeJPADescriminator}"/>
+                        <h:outputText value="#{investorController.selected.personTypeJPADescriminator}" title="#{bundle.ViewInvestorTitle_personTypeJPADescriminator}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_user}"/>
+                        <h:outputText value="#{investorController.selected.user}" title="#{bundle.ViewInvestorTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_country}"/>
+                        <h:outputText value="#{investorController.selected.country}" title="#{bundle.ViewInvestorTitle_country}"/>
+                        <h:outputText value="#{bundle.ViewInvestorLabel_gender}"/>
+                        <h:outputText value="#{investorController.selected.gender}" title="#{bundle.ViewInvestorTitle_gender}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InvestorViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

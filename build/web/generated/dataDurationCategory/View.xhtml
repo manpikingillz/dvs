@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DataDurationCategoryViewDlg" widgetVar="DataDurationCategoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDataDurationCategoryTitle}">
+            <h:form id="DataDurationCategoryViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dataDurationCategoryController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDataDurationCategoryLabel_id}"/>
+                        <h:outputText value="#{dataDurationCategoryController.selected.id}" title="#{bundle.ViewDataDurationCategoryTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDataDurationCategoryLabel_dataDurationCategory}"/>
+                        <h:outputText value="#{dataDurationCategoryController.selected.dataDurationCategory}" title="#{bundle.ViewDataDurationCategoryTitle_dataDurationCategory}"/>
+                        <h:outputText value="#{bundle.ViewDataDurationCategoryLabel_autoTimestamp}"/>
+                        <h:outputText value="#{dataDurationCategoryController.selected.autoTimestamp}" title="#{bundle.ViewDataDurationCategoryTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DataDurationCategoryViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

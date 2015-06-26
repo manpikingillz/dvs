@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserViewDlg" widgetVar="UserViewDialog" modal="true" resizable="false" appendTo="@(body)" header="VIEW USER">
+            <h:form id="UserViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <h:outputText value="#{bundle.ViewUserLabel_surname}"/>
+                        <h:outputText value="#{employeeController.selected.surname}" title="#{bundle.ViewUserTitle_surname}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_lastname}"/>
+                        <h:outputText value="#{employeeController.selected.lastname}" title="#{bundle.ViewUserTitle_lastname}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_gender}"/>
+                        <h:outputText value="#{employeeController.selected.gender.gender}" title="#{bundle.ViewUserTitle_gender}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_phone}"/>
+                        <h:outputText value="#{employeeController.selected.phone}" title="#{bundle.ViewUserTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_email}"/>
+                        <h:outputText value="#{employeeController.selected.email}" title="#{bundle.ViewUserTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_username}"/>
+                        <h:outputText value="#{employeeController.selected.username}" title="#{bundle.ViewUserTitle_username}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_password}"/>
+                        <h:outputText value="#{employeeController.selected.password}" title="#{bundle.ViewUserTitle_password}"/>
+
+                        <h:outputText value="#{bundle.ViewUserLabel_country}"/>
+                        <h:outputText value="#{employeeController.selected.country.countryName}" title="#{bundle.ViewUserTitle_country}"/>
+
+                        <h:outputText value="Enabled"/>
+                        <p:selectBooleanCheckbox value="#{employeeController.selected.enabledOrDisabled}" disabled="true"/>
+
+
+                        <h:outputText value="Category:"/>
+                        <h:outputText value="#{employeeController.selected.personTypeJPADescriminator}" title="#{bundle.ViewUserTitle_personTypeJPADescriminator}"/>
+
+                        <p:outputLabel value="Roles" for="userRoles" />
+                        <p:multiSelectListbox id="userRoles" value="#{employeeController.selected.userGroupCollection}">
+                            <f:selectItems value="#{userGroupController.items}" 
+                                           var="group" 
+                                           itemValue="#{group}"
+                                           itemLabel="#{group.groupname}"
+
+                                           />
+                        </p:multiSelectListbox>
+                        
+                        <h:outputText value="Employee No."/>
+                        <h:outputText value="#{employeeController.selected.employeeNumber}"/>
+                        
+                        <h:outputText value="Job Title"/>
+                        <h:outputText value="#{employeeController.selected.jobtitle.jobtitle}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('UserViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

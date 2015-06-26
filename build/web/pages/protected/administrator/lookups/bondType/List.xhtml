@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/pages/templates/Template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Bond Type"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <p:panel style="width: 30%; margin: auto; text-align: center">
+                <h:outputText value="Bond Type" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+            </p:panel>
+            
+            <p:spacer height="20px" width="0px"/>
+            <h:form id="BondTypeListForm">
+                <p:panel>
+                    <p:dataTable id="datalist" value="#{bondTypeController.items}" var="item"
+                                 selectionMode="single" selection="#{bondTypeController.selected}"
+                                 rowKey="#{item.id}"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton  editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton  editButton deleteButton"/>
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBondTypeTitle_bondType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bondType}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{bondTypeController.prepareCreate}" update=":BondTypeCreateForm" oncomplete="PF('BondTypeCreateDialog').show()"/>
+                            <!--<p:commandButton id="viewButton"   icon="ui-icon-search" value="#//{bundle.View}" update=":BondTypeViewForm" oncomplete="PF('BondTypeViewDialog').show()" disabled="#//{empty bondTypeController.selected}"/>-->
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":BondTypeEditForm" oncomplete="PF('BondTypeEditDialog').show()" disabled="#{empty bondTypeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{bondTypeController.destroy}" update=":growl,datalist" disabled="#{empty bondTypeController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="/pages/protected/administrator/lookups/bondType/Create.xhtml"/>
+            <ui:include src="/pages/protected/administrator/lookups/bondType/Edit.xhtml"/>
+            <ui:include src="/pages/protected/administrator/lookups/bondType/View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

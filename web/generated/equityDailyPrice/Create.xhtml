@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquityDailyPriceCreateDlg" widgetVar="EquityDailyPriceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEquityDailyPriceTitle}">
+            <h:form id="EquityDailyPriceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equityDailyPriceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{equityDailyPriceController.selected.id}" title="#{bundle.CreateEquityDailyPriceTitle_id}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_sharesTraded}" for="sharesTraded" />
+                        <p:inputText id="sharesTraded" value="#{equityDailyPriceController.selected.sharesTraded}" title="#{bundle.CreateEquityDailyPriceTitle_sharesTraded}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_sharesTraded}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_turnOver}" for="turnOver" />
+                        <p:inputText id="turnOver" value="#{equityDailyPriceController.selected.turnOver}" title="#{bundle.CreateEquityDailyPriceTitle_turnOver}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_turnOver}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_vwap}" for="vwap" />
+                        <p:inputText id="vwap" value="#{equityDailyPriceController.selected.vwap}" title="#{bundle.CreateEquityDailyPriceTitle_vwap}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_vwap}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_low}" for="low" />
+                        <p:inputText id="low" value="#{equityDailyPriceController.selected.low}" title="#{bundle.CreateEquityDailyPriceTitle_low}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_low}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_high}" for="high" />
+                        <p:inputText id="high" value="#{equityDailyPriceController.selected.high}" title="#{bundle.CreateEquityDailyPriceTitle_high}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_high}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_outstandingBid}" for="outstandingBid" />
+                        <p:inputText id="outstandingBid" value="#{equityDailyPriceController.selected.outstandingBid}" title="#{bundle.CreateEquityDailyPriceTitle_outstandingBid}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_outstandingBid}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_outstandingOffer}" for="outstandingOffer" />
+                        <p:inputText id="outstandingOffer" value="#{equityDailyPriceController.selected.outstandingOffer}" title="#{bundle.CreateEquityDailyPriceTitle_outstandingOffer}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_outstandingOffer}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_PERatio}" for="PERatio" />
+                        <p:inputText id="PERatio" value="#{equityDailyPriceController.selected.PERatio}" title="#{bundle.CreateEquityDailyPriceTitle_PERatio}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_PERatio}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_marketCap}" for="marketCap" />
+                        <p:inputText id="marketCap" value="#{equityDailyPriceController.selected.marketCap}" title="#{bundle.CreateEquityDailyPriceTitle_marketCap}" required="true" requiredMessage="#{bundle.CreateEquityDailyPriceRequiredMessage_marketCap}"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{equityDailyPriceController.selected.autoTimestamp}" title="#{bundle.EditEquityDailyPriceTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_equityMarketDay}" for="equityMarketDay" />
+                        <p:selectOneMenu id="equityMarketDay" value="#{equityDailyPriceController.selected.equityMarketDay}" required="true" requiredMessage="#{bundle.EditEquityDailyPriceRequiredMessage_equityMarketDay}">
+                            <f:selectItems value="#{equityMarketDayController.itemsAvailableSelectOne}"
+                                           var="equityMarketDayItem"
+                                           itemValue="#{equityMarketDayItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEquityDailyPriceLabel_equity}" for="equity" />
+                        <p:selectOneMenu id="equity" value="#{equityDailyPriceController.selected.equity}" required="true" requiredMessage="#{bundle.EditEquityDailyPriceRequiredMessage_equity}">
+                            <f:selectItems value="#{equityController.itemsAvailableSelectOne}"
+                                           var="equityItem"
+                                           itemValue="#{equityItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equityDailyPriceController.create}" value="#{bundle.Save}" update="display,:EquityDailyPriceListForm:datalist,:growl" oncomplete="handleSubmit(args,'EquityDailyPriceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquityDailyPriceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

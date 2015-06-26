@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BondViewDlg" widgetVar="BondViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBondTitle}">
+            <h:form id="BondViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bondController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBondLabel_id}"/>
+                        <h:outputText value="#{bondController.selected.id}" title="#{bundle.ViewBondTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_issuerCode}"/>
+                        <h:outputText value="#{bondController.selected.issuerCode}" title="#{bundle.ViewBondTitle_issuerCode}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_isin}"/>
+                        <h:outputText value="#{bondController.selected.isin}" title="#{bundle.ViewBondTitle_isin}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_shortName}"/>
+                        <h:outputText value="#{bondController.selected.shortName}" title="#{bundle.ViewBondTitle_shortName}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_parValue}"/>
+                        <h:outputText value="#{bondController.selected.parValue}" title="#{bundle.ViewBondTitle_parValue}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_quantityIssued}"/>
+                        <h:outputText value="#{bondController.selected.quantityIssued}" title="#{bundle.ViewBondTitle_quantityIssued}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_dateIssued}"/>
+                        <h:outputText value="#{bondController.selected.dateIssued}" title="#{bundle.ViewBondTitle_dateIssued}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBondLabel_dateExpire}"/>
+                        <h:outputText value="#{bondController.selected.dateExpire}" title="#{bundle.ViewBondTitle_dateExpire}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBondLabel_couponRate}"/>
+                        <h:outputText value="#{bondController.selected.couponRate}" title="#{bundle.ViewBondTitle_couponRate}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_dateFirstCoupon}"/>
+                        <h:outputText value="#{bondController.selected.dateFirstCoupon}" title="#{bundle.ViewBondTitle_dateFirstCoupon}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBondLabel_dateFinalCoupon}"/>
+                        <h:outputText value="#{bondController.selected.dateFinalCoupon}" title="#{bundle.ViewBondTitle_dateFinalCoupon}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBondLabel_term}"/>
+                        <h:outputText value="#{bondController.selected.term}" title="#{bundle.ViewBondTitle_term}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_autoTimestamp}"/>
+                        <h:outputText value="#{bondController.selected.autoTimestamp}" title="#{bundle.ViewBondTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBondLabel_bondType}"/>
+                        <h:outputText value="#{bondController.selected.bondType}" title="#{bundle.ViewBondTitle_bondType}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_currencyType}"/>
+                        <h:outputText value="#{bondController.selected.currencyType}" title="#{bundle.ViewBondTitle_currencyType}"/>
+                        <h:outputText value="#{bundle.ViewBondLabel_countryOfInitialIssue}"/>
+                        <h:outputText value="#{bondController.selected.countryOfInitialIssue}" title="#{bundle.ViewBondTitle_countryOfInitialIssue}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BondViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

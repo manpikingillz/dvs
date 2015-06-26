@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeeCreateDlg" widgetVar="EmployeeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmployeeTitle}">
+            <h:form id="EmployeeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{employeeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_personId}" for="personId" />
+                        <p:inputText id="personId" value="#{employeeController.selected.personId}" title="#{bundle.CreateEmployeeTitle_personId}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_employeeNumber}" for="employeeNumber" />
+                        <p:inputText id="employeeNumber" value="#{employeeController.selected.employeeNumber}" title="#{bundle.CreateEmployeeTitle_employeeNumber}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_employeeNumber}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{employeeController.selected.autoTimestamp}" title="#{bundle.EditEmployeeTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{employeeController.selected.user}" required="true" requiredMessage="#{bundle.EditEmployeeRequiredMessage_user}">
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_jobtitle}" for="jobtitle" />
+                        <p:selectOneMenu id="jobtitle" value="#{employeeController.selected.jobtitle}" required="true" requiredMessage="#{bundle.EditEmployeeRequiredMessage_jobtitle}">
+                            <f:selectItems value="#{jobtitleController.itemsAvailableSelectOne}"
+                                           var="jobtitleItem"
+                                           itemValue="#{jobtitleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_personId}" for="personId" />
+                        <p:inputText id="personId" value="#{employeeController.selected.personId}" title="#{bundle.CreateEmployeeTitle_personId}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{employeeController.selected.username}" title="#{bundle.CreateEmployeeTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{employeeController.selected.password}" title="#{bundle.CreateEmployeeTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{employeeController.selected.autoTimestamp}" title="#{bundle.EditEmployeeTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_enabledOrDisabled}" for="enabledOrDisabled" />
+                        <p:selectBooleanCheckbox id="enabledOrDisabled" value="#{employeeController.selected.enabledOrDisabled}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_person}" for="person" />
+                        <p:selectOneMenu id="person" value="#{employeeController.selected.person}" required="true" requiredMessage="#{bundle.EditEmployeeRequiredMessage_person}">
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="personItem"
+                                           itemValue="#{personItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_employee}" for="employee" />
+                        <p:selectOneMenu id="employee" value="#{employeeController.selected.employee}" >
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="employeeItem"
+                                           itemValue="#{employeeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_investor}" for="investor" />
+                        <p:selectOneMenu id="investor" value="#{employeeController.selected.investor}" >
+                            <f:selectItems value="#{investorController.itemsAvailableSelectOne}"
+                                           var="investorItem"
+                                           itemValue="#{investorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_personId}" for="personId" />
+                        <p:inputText id="personId" value="#{employeeController.selected.personId}" title="#{bundle.CreateEmployeeTitle_personId}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_personId}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_surname}" for="surname" />
+                        <p:inputText id="surname" value="#{employeeController.selected.surname}" title="#{bundle.CreateEmployeeTitle_surname}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_surname}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_lastname}" for="lastname" />
+                        <p:inputText id="lastname" value="#{employeeController.selected.lastname}" title="#{bundle.CreateEmployeeTitle_lastname}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_lastname}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{employeeController.selected.phone}" title="#{bundle.CreateEmployeeTitle_phone}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_phone}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{employeeController.selected.email}" title="#{bundle.CreateEmployeeTitle_email}" required="true" requiredMessage="#{bundle.CreateEmployeeRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_personTypeJPADescriminator}" for="personTypeJPADescriminator" />
+                        <p:inputText id="personTypeJPADescriminator" value="#{employeeController.selected.personTypeJPADescriminator}" title="#{bundle.CreateEmployeeTitle_personTypeJPADescriminator}" />
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{employeeController.selected.user}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_country}" for="country" />
+                        <p:selectOneMenu id="country" value="#{employeeController.selected.country}" required="true" requiredMessage="#{bundle.EditEmployeeRequiredMessage_country}">
+                            <f:selectItems value="#{countryController.itemsAvailableSelectOne}"
+                                           var="countryItem"
+                                           itemValue="#{countryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmployeeLabel_gender}" for="gender" />
+                        <p:selectOneMenu id="gender" value="#{employeeController.selected.gender}" required="true" requiredMessage="#{bundle.EditEmployeeRequiredMessage_gender}">
+                            <f:selectItems value="#{genderController.itemsAvailableSelectOne}"
+                                           var="genderItem"
+                                           itemValue="#{genderItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{employeeController.create}" value="#{bundle.Save}" update="display,:EmployeeListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmployeeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmployeeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

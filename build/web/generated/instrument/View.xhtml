@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InstrumentViewDlg" widgetVar="InstrumentViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInstrumentTitle}">
+            <h:form id="InstrumentViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{instrumentController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInstrumentLabel_id}"/>
+                        <h:outputText value="#{instrumentController.selected.id}" title="#{bundle.ViewInstrumentTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInstrumentLabel_instrumentName}"/>
+                        <h:outputText value="#{instrumentController.selected.instrumentName}" title="#{bundle.ViewInstrumentTitle_instrumentName}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InstrumentViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

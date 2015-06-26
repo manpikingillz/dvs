@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BondDailyPriceViewDlg" widgetVar="BondDailyPriceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBondDailyPriceTitle}">
+            <h:form id="BondDailyPriceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bondDailyPriceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBondDailyPriceLabel_id}"/>
+                        <h:outputText value="#{bondDailyPriceController.selected.id}" title="#{bundle.ViewBondDailyPriceTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewBondDailyPriceLabel_tradedYield}"/>
+                        <h:outputText value="#{bondDailyPriceController.selected.tradedYield}" title="#{bundle.ViewBondDailyPriceTitle_tradedYield}"/>
+                        <h:outputText value="#{bundle.ViewBondDailyPriceLabel_dirtyPrice}"/>
+                        <h:outputText value="#{bondDailyPriceController.selected.dirtyPrice}" title="#{bundle.ViewBondDailyPriceTitle_dirtyPrice}"/>
+                        <h:outputText value="#{bundle.ViewBondDailyPriceLabel_cleanPrice}"/>
+                        <h:outputText value="#{bondDailyPriceController.selected.cleanPrice}" title="#{bundle.ViewBondDailyPriceTitle_cleanPrice}"/>
+                        <h:outputText value="#{bundle.ViewBondDailyPriceLabel_autoTimestamp}"/>
+                        <h:outputText value="#{bondDailyPriceController.selected.autoTimestamp}" title="#{bundle.ViewBondDailyPriceTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewBondDailyPriceLabel_bond}"/>
+                        <h:outputText value="#{bondDailyPriceController.selected.bond}" title="#{bundle.ViewBondDailyPriceTitle_bond}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BondDailyPriceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

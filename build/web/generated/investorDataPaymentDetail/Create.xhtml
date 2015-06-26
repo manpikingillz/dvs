@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorDataPaymentDetailCreateDlg" widgetVar="InvestorDataPaymentDetailCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInvestorDataPaymentDetailTitle}">
+            <h:form id="InvestorDataPaymentDetailCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorDataPaymentDetailController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{investorDataPaymentDetailController.selected.id}" title="#{bundle.CreateInvestorDataPaymentDetailTitle_id}" required="true" requiredMessage="#{bundle.CreateInvestorDataPaymentDetailRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_dateOfPayment}" for="dateOfPayment" />
+                        <p:calendar id="dateOfPayment" pattern="MM/dd/yyyy" value="#{investorDataPaymentDetailController.selected.dateOfPayment}" title="#{bundle.EditInvestorDataPaymentDetailTitle_dateOfPayment}" required="true" requiredMessage="#{bundle.EditInvestorDataPaymentDetailRequiredMessage_dateOfPayment}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_amountPaid}" for="amountPaid" />
+                        <p:inputText id="amountPaid" value="#{investorDataPaymentDetailController.selected.amountPaid}" title="#{bundle.CreateInvestorDataPaymentDetailTitle_amountPaid}" required="true" requiredMessage="#{bundle.CreateInvestorDataPaymentDetailRequiredMessage_amountPaid}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_paymentSlipNumber}" for="paymentSlipNumber" />
+                        <p:inputText id="paymentSlipNumber" value="#{investorDataPaymentDetailController.selected.paymentSlipNumber}" title="#{bundle.CreateInvestorDataPaymentDetailTitle_paymentSlipNumber}" required="true" requiredMessage="#{bundle.CreateInvestorDataPaymentDetailRequiredMessage_paymentSlipNumber}"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_paymentSlipAttachment}" for="paymentSlipAttachment" />
+                        <p:inputTextarea rows="4" cols="30" id="paymentSlipAttachment" value="#{investorDataPaymentDetailController.selected.paymentSlipAttachment}" title="#{bundle.CreateInvestorDataPaymentDetailTitle_paymentSlipAttachment}" />
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_bank}" for="bank" />
+                        <p:inputText id="bank" value="#{investorDataPaymentDetailController.selected.bank}" title="#{bundle.CreateInvestorDataPaymentDetailTitle_bank}" />
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_bankBranch}" for="bankBranch" />
+                        <p:inputText id="bankBranch" value="#{investorDataPaymentDetailController.selected.bankBranch}" title="#{bundle.CreateInvestorDataPaymentDetailTitle_bankBranch}" />
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{investorDataPaymentDetailController.selected.autoTimestamp}" title="#{bundle.EditInvestorDataPaymentDetailTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_branchCountry}" for="branchCountry" />
+                        <p:selectOneMenu id="branchCountry" value="#{investorDataPaymentDetailController.selected.branchCountry}" required="true" requiredMessage="#{bundle.EditInvestorDataPaymentDetailRequiredMessage_branchCountry}">
+                            <f:selectItems value="#{countryController.itemsAvailableSelectOne}"
+                                           var="branchCountryItem"
+                                           itemValue="#{branchCountryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInvestorDataPaymentDetailLabel_investorGeneralDataRequest}" for="investorGeneralDataRequest" />
+                        <p:selectOneMenu id="investorGeneralDataRequest" value="#{investorDataPaymentDetailController.selected.investorGeneralDataRequest}" required="true" requiredMessage="#{bundle.EditInvestorDataPaymentDetailRequiredMessage_investorGeneralDataRequest}">
+                            <f:selectItems value="#{investorGeneralDataRequestController.itemsAvailableSelectOne}"
+                                           var="investorGeneralDataRequestItem"
+                                           itemValue="#{investorGeneralDataRequestItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{investorDataPaymentDetailController.create}" value="#{bundle.Save}" update="display,:InvestorDataPaymentDetailListForm:datalist,:growl" oncomplete="handleSubmit(args,'InvestorDataPaymentDetailCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InvestorDataPaymentDetailCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

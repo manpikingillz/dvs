@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvestorGeneralDataRequestViewDlg" widgetVar="InvestorGeneralDataRequestViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInvestorGeneralDataRequestTitle}">
+            <h:form id="InvestorGeneralDataRequestViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{investorGeneralDataRequestController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInvestorGeneralDataRequestLabel_id}"/>
+                        <h:outputText value="#{investorGeneralDataRequestController.selected.id}" title="#{bundle.ViewInvestorGeneralDataRequestTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInvestorGeneralDataRequestLabel_requestDate}"/>
+                        <h:outputText value="#{investorGeneralDataRequestController.selected.requestDate}" title="#{bundle.ViewInvestorGeneralDataRequestTitle_requestDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvestorGeneralDataRequestLabel_amount}"/>
+                        <h:outputText value="#{investorGeneralDataRequestController.selected.amount}" title="#{bundle.ViewInvestorGeneralDataRequestTitle_amount}"/>
+                        <h:outputText value="#{bundle.ViewInvestorGeneralDataRequestLabel_activeStatus}"/>
+                        <p:selectBooleanCheckbox value="#{investorGeneralDataRequestController.selected.activeStatus}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewInvestorGeneralDataRequestLabel_person}"/>
+                        <h:outputText value="#{investorGeneralDataRequestController.selected.person}" title="#{bundle.ViewInvestorGeneralDataRequestTitle_person}"/>
+                        <h:outputText value="#{bundle.ViewInvestorGeneralDataRequestLabel_autoTimestamp}"/>
+                        <h:outputText value="#{investorGeneralDataRequestController.selected.autoTimestamp}" title="#{bundle.ViewInvestorGeneralDataRequestTitle_autoTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InvestorGeneralDataRequestViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

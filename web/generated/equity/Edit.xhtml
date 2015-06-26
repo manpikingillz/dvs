@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquityEditDlg" widgetVar="EquityEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEquityTitle}">
+            <h:form id="EquityEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equityController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEquityLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{equityController.selected.id}" title="#{bundle.EditEquityTitle_id}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_nameOfSecurity}" for="nameOfSecurity" />
+                        <p:inputText id="nameOfSecurity" value="#{equityController.selected.nameOfSecurity}" title="#{bundle.EditEquityTitle_nameOfSecurity}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_nameOfSecurity}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_shortName}" for="shortName" />
+                        <p:inputText id="shortName" value="#{equityController.selected.shortName}" title="#{bundle.EditEquityTitle_shortName}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_shortName}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_isin}" for="isin" />
+                        <p:inputText id="isin" value="#{equityController.selected.isin}" title="#{bundle.EditEquityTitle_isin}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_isin}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_issuerCode}" for="issuerCode" />
+                        <p:inputText id="issuerCode" value="#{equityController.selected.issuerCode}" title="#{bundle.EditEquityTitle_issuerCode}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_issuerCode}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_FHLimit}" for="FHLimit" />
+                        <p:inputText id="FHLimit" value="#{equityController.selected.FHLimit}" title="#{bundle.EditEquityTitle_FHLimit}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_FHLimit}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_referencePrice}" for="referencePrice" />
+                        <p:inputText id="referencePrice" value="#{equityController.selected.referencePrice}" title="#{bundle.EditEquityTitle_referencePrice}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_referencePrice}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_quantityIssued}" for="quantityIssued" />
+                        <p:inputText id="quantityIssued" value="#{equityController.selected.quantityIssued}" title="#{bundle.EditEquityTitle_quantityIssued}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_quantityIssued}"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_dateAdded}" for="dateAdded" />
+                        <p:calendar id="dateAdded" pattern="MM/dd/yyyy" value="#{equityController.selected.dateAdded}" title="#{bundle.EditEquityTitle_dateAdded}" required="true" requiredMessage="#{bundle.EditEquityRequiredMessage_dateAdded}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{equityController.selected.autoTimestamp}" title="#{bundle.EditEquityTitle_autoTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEquityLabel_countryOfInitialIssue}" for="countryOfInitialIssue" />
+                        <p:selectOneMenu id="countryOfInitialIssue" value="#{equityController.selected.countryOfInitialIssue}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{countryController.itemsAvailableSelectOne}"
+                                           var="countryOfInitialIssueItem"
+                                           itemValue="#{countryOfInitialIssueItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equityController.update}" value="#{bundle.Save}" update="display,:EquityListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EquityEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquityEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

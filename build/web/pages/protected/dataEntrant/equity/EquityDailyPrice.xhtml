@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/pages/templates/Template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        <h:outputText value="Equity Daily Price"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+
+        <p:panel style="width: 30%; margin: auto; text-align: center">
+            <h:outputText value="Equity daily price" style="font-size: xx-large!important; color: #0BA25E; font-family: sans-serif; "/>
+        </p:panel>
+
+        <p:spacer height="20px" width="0px"/>
+
+        <!--<p:fieldset legend="Equity Market Day" toggleable="true" style="background: #E0EAFD!important">-->
+        <h:form id="equityMarketDayForm">
+            <p:panelGrid styleClass="panelgrid-datatable">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column><p:outputLabel value="DateOfMarket:" for="dateOfMarket" /></p:column>
+                        <p:column><p:outputLabel value="ALSICurrent:" for="ALSICurrent" /></p:column>
+                        <p:column><p:outputLabel value="LSICurrent:" for="LSICurrent" /></p:column>
+                        <p:column></p:column>
+                    </p:row>
+                </f:facet>
+
+                <p:row>
+                    <p:column>
+                        <p:calendar id="dateOfMarket" value="#{equityMarketDayController.selected.dateOfMarket}" title="DateOfMarket" required="true" requiredMessage="The DateOfMarket field is required.">
+                            <!--<f:convertDateTime pattern="MM/dd/yyyy" />-->
+                        </p:calendar>
+                    </p:column>
+                    <p:column><p:inputText id="ALSICurrent" value="#{equityMarketDayController.selected.ALSICurrent}" title="ALSICurrent" required="true" requiredMessage="The ALSICurrent field is required."/></p:column>
+                    <p:column><p:inputText id="LSICurrent" value="#{equityMarketDayController.selected.LSICurrent}" title="LSICurrent" required="true" requiredMessage="The LSICurrent field is required."/></p:column>
+                    <p:column><p:commandButton value="Save" action="#{equityMarketDayController.create()}" update=":equityMarketDayDataListForm:equityMarketDayDataList"/></p:column>
+                </p:row>
+            </p:panelGrid>
+        </h:form>
+
+        <p:spacer height="20px" width="0px"/>
+
+        <h:form id="equityMarketDayDataListForm">
+            <p:dataTable id="equityMarketDayDataList" value="#{equityMarketDayController.items}" 
+                         var="item"
+                         selection="#{equityMarketDayController.selected}"
+                         selectionMode="single"
+                         rowKey="#{item.id}"
+                         styleClass="panelgrid-datatable"
+                         >
+
+                <p:ajax event="rowSelect" update=":equityMarketDayForm :equityDailyPricePG"/>
+                <f:facet name="header">
+                    <p:commandButton value="Delete" action="#{equityMarketDayController.destroy()}" update="equityMarketDayDataList"/>
+                    <p:commandButton value="New" action="#{equityMarketDayController.prepareCreate()}" ajax="false" immediate="true">
+                        <p:resetInput target=":equityMarketDayForm"/>
+                    </p:commandButton>
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="DateOfMarket"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dateOfMarket}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ALSICurrent"/>
+                    </f:facet>
+                    <h:outputText value="#{item.ALSICurrent}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="LSICurrent"/>
+                    </f:facet>
+                    <h:outputText value="#{item.LSICurrent}"/>
+                </p:column>
+                
+            </p:dataTable>
+        </h:form>
+        <!--</p:fieldset>-->
+        <p:spacer height="30px" width="0px"/>
+        <h:panelGroup id="equityDailyPricePG" layout="block" >
+            <h:panelGroup layout="block" rendered="#{equityMarketDayController.selected.id gt 0}">
+                <p:tabView id="EquityDailyPriceTabView">
+                    <p:tab title="New Equity Daily">
+                        <h:form>
+                            <h:panelGroup layout="block" style="vertical-align: middle">
+                                <p:panelGrid>
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Equity:" for="equity" /></p:column>
+                                        <p:column>
+                                            <p:selectOneMenu id="equity" value="#{equityDailyPriceController.selected.equity}" required="true" requiredMessage="The Equity field is required.">
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItem itemLabel="Select" noSelectionOption="true"/>
+                                                <f:selectItems value="#{equityController.items}"
+                                                               var="equity"
+                                                               itemValue="#{equity}"
+                                                               itemLabel="#{equity.shortName}"/>
+                                            </p:selectOneMenu>
+                                        </p:column>
+                                        <p:column rowspan="5"/>  
+                                        <p:column><p:outputLabel value="Shares Traded:" for="sharesTraded" /></p:column>
+                                        <p:column><p:inputText id="sharesTraded" value="#{equityDailyPriceController.selected.sharesTraded}" title="SharesTraded" required="true" requiredMessage="The SharesTraded field is required."/></p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Turn Over:" for="turnOver" /></p:column>
+                                        <p:column><p:inputText id="turnOver" value="#{equityDailyPriceController.selected.turnOver}" title="TurnOver" required="true" requiredMessage="The TurnOver field is required."/></p:column>
+                                        <p:column><p:outputLabel value="PE Ratio:" for="PERatio" /></p:column>
+                                        <p:column><p:inputText id="PERatio" value="#{equityDailyPriceController.selected.PERatio}" title="PERatio" required="true" requiredMessage="The PERatio field is required."/></p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Vwap:" for="vwap" /></p:column>
+                                        <p:column><p:inputText id="vwap" value="#{equityDailyPriceController.selected.vwap}" title="Vwap" required="true" requiredMessage="The Vwap field is required."/></p:column>
+                                        <p:column><p:outputLabel value="Market Cap:" for="marketCap" /></p:column>
+                                        <p:column><p:inputText id="marketCap" value="#{equityDailyPriceController.selected.marketCap}" title="MarketCap" required="true" requiredMessage="The MarketCap field is required."/></p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column><p:outputLabel value="Low:" for="low" /></p:column>
+                                        <p:column><p:inputText id="low" value="#{equityDailyPriceController.selected.low}" title="Low" required="true" requiredMessage="The Low field is required."/></p:column>
+                                        <p:column><p:outputLabel value="Outstanding Offer:" for="outstandingOffer" /></p:column>
+                                        <p:column><p:inputText id="outstandingOffer" value="#{equityDailyPriceController.selected.outstandingOffer}" title="OutstandingOffer" required="true" requiredMessage="The OutstandingOffer field is required."/></p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column><p:outputLabel value="High:" for="high" /></p:column>
+                                        <p:column><p:inputText id="high" value="#{equityDailyPriceController.selected.high}" title="High" required="true" requiredMessage="The High field is required."/></p:column>
+                                        <p:column><p:outputLabel value="Outstanding Bid:" for="outstandingBid" /></p:column>
+                                        <p:column><p:inputText id="outstandingBid" value="#{equityDailyPriceController.selected.outstandingBid}" title="OutstandingBid" required="true" requiredMessage="The OutstandingBid field is required."/></p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column></p:column>
+                                        <p:column>
+                                            <h:panelGroup layout="block" style="vertical-align: middle">
+                                                <p:commandButton action="#{equityDailyPriceController.create()}" value="Save" >
+                                                    <f:setPropertyActionListener target="#{equityDailyPriceController.selected.equityMarketDay}" value="#{equityMarketDayController.selected}"/>
+                                                </p:commandButton>
+                                            </h:panelGroup>
+                                        </p:column>
+                                        <p:column></p:column>
+                                        <p:column></p:column>
+                                    </p:row>
+
+                                </p:panelGrid>
+                            </h:panelGroup>
+
+                        </h:form>
+                    </p:tab>
+
+                    <p:tab title="Upload Excel Sheet">
+                        <h:form enctype="multipart/form-data">
+                            <p:fileUpload update="uploadmsg, :EquityDailyPriceTabView"
+                                          sizeLimit="1000000"
+                                          fileUploadListener="#{fileUploadController.uploadEquityDailyPriceExcel}" mode="advanced"
+                                          allowTypes="/(\.|\/)(xls|xlsx)$/" immediate="true" />
+                            <p:growl id="uploadmsg" showDetail="true" autoUpdate="true"/>
+                        </h:form>
+                    </p:tab>
+
+                    <p:tab title="List of Equity Daily Prices">
+                        <h:form>
+                            <p:dataTable id="datalist" value="#{equityDailyPriceController.items}" 
+                                         var="item"
+                                         draggableColumns="true"
+                                         resizableColumns="true"
+                                         >
+                                <f:facet name="header">
+                                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="datalist" trigger="toggler" />
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Equity"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.equity.shortName}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Shares Traded"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sharesTraded}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Turn Over"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.turnOver}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Vwap"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.vwap}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Low"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.low}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="High"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.high}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Outstanding Bid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.outstandingBid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Outstanding Offer"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.outstandingOffer}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PE Ratio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.PERatio}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Market Cap"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.marketCap}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:tab>
+                </p:tabView>
+            </h:panelGroup>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

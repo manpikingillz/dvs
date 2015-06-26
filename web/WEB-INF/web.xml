@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
+    <context-param>
+        <description>Storage for pictures, files and any other uploads</description>
+        <param-name>uploadDirectory</param-name>
+        <param-value>D:/uploads</param-value>
+    </context-param>
+    <filter>
+        <filter-name>LoginPageFilter</filter-name>
+        <filter-class>ug.or.use.dvs.controller.util.LoginPageFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginPageFilter</filter-name>
+        <url-pattern>/Login.xhtml</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/Login.xhtml</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/Login.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/pages/error/ErrorAccessDenied.xhtml</location>
+    </error-page>
+    <security-constraint>
+        <display-name>Administrator Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin Area</web-resource-name>
+            <description/>
+            <url-pattern>/pages/protected/administrator/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>DataEntrant Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>DataEntrant Area</web-resource-name>
+            <description/>
+            <url-pattern>/pages/protected/dataEntrant/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Administrator</role-name>
+            <role-name>DataEntrant</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Investor Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Investor Area</web-resource-name>
+            <description/>
+            <url-pattern>/pages/protected/investor/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Administrator</role-name>
+            <role-name>Investor</role-name>
+            <role-name>DataEntrant</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>dvs_jdbc_realm</realm-name>
+        <form-login-config>
+            <form-login-page>/Login.xhtml</form-login-page>
+            <form-error-page>/Login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>Administrator</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Investor</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>DataEntrant</role-name>
+    </security-role>
+</web-app>

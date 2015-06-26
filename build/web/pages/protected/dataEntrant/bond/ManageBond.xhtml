@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/pages/templates/Template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        <h:outputText value="New Bond"/>
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="newBondForm">
+            
+            <p:panel style="width: 30%; margin: auto; text-align: center">
+                <h:outputText value="#{bondController.selected.id gt 0 ? 'Edit Bond':'Register Bond'}" style="font-size: medium; font-weight: bold; color: #0A2693"/>
+            </p:panel>
+
+            <p:spacer height="20px" width="0px"/>
+            <p:fieldset legend="#{bondController.selected.id gt 0 ? 'Edit Bond':'New Bond'}" toggleable="true">
+                <p:panelGrid>
+                    <p:row>
+                        <p:column><p:outputLabel value="Issuer Code:" for="issuerCode" /></p:column>
+                        <p:column> <p:inputText id="issuerCode" value="#{bondController.selected.issuerCode}" title="IssuerCode" required="true" requiredMessage="The IssuerCode field is required."/></p:column>
+                        <p:column rowspan="7"/>
+                        <p:column><p:outputLabel value="Coupon Rate:" for="couponRate" /></p:column>
+                        <p:column><p:inputText id="couponRate" value="#{bondController.selected.couponRate}" title="CouponRate" required="true" requiredMessage="The CouponRate field is required."/></p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column><p:outputLabel value="ISIN:" for="isin" /></p:column>
+                        <p:column><p:inputText id="isin" value="#{bondController.selected.isin}" title="Isin" required="true" requiredMessage="The Isin field is required."/></p:column>
+                        <p:column><p:outputLabel value="Date First Coupon:" for="dateFirstCoupon" /></p:column>
+                        <p:column><p:calendar id="dateFirstCoupon" value="#{bondController.selected.dateFirstCoupon}" title="DateFirstCoupon" required="true" requiredMessage="The DateFirstCoupon field is required."/></p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column><p:outputLabel value="Short Name:" for="shortName" /></p:column>
+                        <p:column><p:inputText id="shortName" value="#{bondController.selected.shortName}" title="ShortName" required="true" requiredMessage="The ShortName field is required."/></p:column>
+                        <p:column><p:outputLabel value="Date Final Coupon:" for="dateFinalCoupon" /></p:column>
+                        <p:column><p:calendar id="dateFinalCoupon" value="#{bondController.selected.dateFinalCoupon}" title="DateFinalCoupon" required="true" requiredMessage="The DateFinalCoupon field is required."/></p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column><p:outputLabel value="Par Value:" for="parValue" /></p:column>
+                        <p:column> <p:inputText id="parValue" value="#{bondController.selected.parValue}" title="ParValue" required="true" requiredMessage="The ParValue field is required."/></p:column>
+                        <p:column><p:outputLabel value="Term:" for="term" /></p:column>
+                        <p:column><p:inputText id="term" value="#{bondController.selected.term}" title="Term" required="true" requiredMessage="The Term field is required."/></p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column><p:outputLabel value="Quantity Issued:" for="quantityIssued" /></p:column>
+                        <p:column><p:inputText id="quantityIssued" value="#{bondController.selected.quantityIssued}" title="QuantityIssued" required="true" requiredMessage="The QuantityIssued field is required."/></p:column>
+                        <p:column><p:outputLabel value="Bond Type:" for="bondType" /></p:column>
+                        <p:column>
+                            <p:selectOneMenu id="bondType" value="#{bondController.selected.bondType}" required="true" requiredMessage="The BondType field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{bondTypeController.items}"
+                                       var="bond"
+                                       itemValue="#{bond}"
+                                       itemLabel="#{bond.bondType}"/>
+                    </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column><p:outputLabel value="Date Issued:" for="dateIssued" /></p:column>
+                        <p:column><p:calendar id="dateIssued" value="#{bondController.selected.dateIssued}" title="DateIssued" required="true" requiredMessage="The DateIssued field is required."/></p:column>
+                        <p:column><p:outputLabel value="CurrencyType:" for="currencyType" /></p:column>
+                        <p:column>
+                            <p:selectOneMenu id="currencyType" value="#{bondController.selected.currencyType}" required="true" requiredMessage="The CurrencyType field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{currencyTypeController.items}"
+                                       var="currency"
+                                       itemValue="#{currency}"
+                                       itemLabel="#{currency.currencyTypeShortName}"/>
+                    </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column><p:outputLabel value="Date Expire:" for="dateExpire" /></p:column>
+                        <p:column><p:calendar id="dateExpire" value="#{bondController.selected.dateExpire}" title="DateExpire" required="true" requiredMessage="The DateExpire field is required."/></p:column>
+                        <p:column><p:outputLabel value="Country Of InitialIssue:" for="countryOfInitialIssue" /></p:column>
+                        <p:column>
+                            <p:selectOneMenu id="countryOfInitialIssue" value="#{bondController.selected.countryOfInitialIssue}" required="true" requiredMessage="The CountryOfInitialIssue field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{countryController.items}"
+                                       var="country"
+                                       itemValue="#{country}"
+                                       itemLabel="#{country.countryName}"/>
+                    </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column/>
+                        <p:column>
+                            <p:commandButton value="Save" action="#{bondController.create()}" update=":newBondDatalistForm:datalist" rendered="#{bondController.selected.id gt 0 ? false:true}"/>
+                            <p:commandButton value="Update" action="#{bondController.update()}" update=":newBondDatalistForm:datalist" rendered="#{bondController.selected.id gt 0}"/>
+                            <p:commandButton value="New Bond" action="#{bondController.prepareCreate()}" ajax="false" immediate="true" update=":newBondDatalistForm:datalist" rendered="#{bondController.selected.id gt 0}">
+                                <p:resetInput target="newBondForm"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:fieldset>
+        </h:form>
+        <p:spacer height="20px" width="0px"/>
+
+        <p:fieldset legend="List of Bonds" toggleable="true" collapsed="true">
+            <h:form id="newBondDatalistForm">
+                <p:dataTable id="datalist" value="#{bondController.items}" 
+                             var="item"
+                             selection="#{bondController.selected}"
+                             selectionMode="single"
+                             rowKey="#{item.id}"
+                             >
+                    <p:ajax event="rowSelect" update=":newBondForm deleteButton"/>
+
+                    <f:facet name="header">
+                        <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                        <p:columnToggler datasource="datalist" trigger="toggler" />
+                    </f:facet>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Issuer Code"/>
+                        </f:facet>
+                        <h:outputText value="#{item.issuerCode}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ISIN"/>
+                        </f:facet>
+                        <h:outputText value="#{item.isin}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Short Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.shortName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Par Value"/>
+                        </f:facet>
+                        <h:outputText value="#{item.parValue}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantity Issued"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quantityIssued}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date Issued"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateIssued}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date Expire"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateExpire}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Coupon Rate"/>
+                        </f:facet>
+                        <h:outputText value="#{item.couponRate}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date First Coupon"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateFirstCoupon}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date Final Coupon"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateFinalCoupon}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Term"/>
+                        </f:facet>
+                        <h:outputText value="#{item.term}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Bond Type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bondType.bondType}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Currency Type"/>
+                        </f:facet>
+                        <h:outputText value="#{item.currencyType.currencyTypeShortName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Country Of InitialI ssue"/>
+                        </f:facet>
+                        <h:outputText value="#{item.countryOfInitialIssue.countryShortName}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="deleteButton" value="Delete" action="#{bondController.destroy()}" update=":newBondForm" disabled="#{bondController.selected.id gt 0 ?false:true}"/>
+                    </f:facet>
+                </p:dataTable>
+                
+            </h:form>
+        </p:fieldset>
+
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      template="/pages/templates/LoginTemplate.xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<!--    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>-->
+<ui:define name="west">
+        <!--Login username and password-->
+ <!--margin-left: 40%; margin-top: 5%-->
+        <!--<p:fieldset legend="Please login here" style="background: #E0EAFD!important; width: 15%;">-->
+        <!--<h:panelGroup layout="block" style="text-align: center; margin-left: 40%;  ">-->
+        <p:panel>    
+        <h:panelGrid columns="1">
+                <h:form id="loginForm">
+                    <p:growl id="msg" showDetail="true" sticky="true" autoUpdate="true"  />
+                    <h:panelGrid columns="1">
+                        <p:inputText value="#{loginController.username}"  style="border-radius: 0.0em; background: #feffff url(resources/images/loginInputLogo.png) no-repeat!important;padding: 10px 10px 10px 20px; background-position: 5px -2px !important;  border: 1px solid rgb(204,204,204); color: #590D4F; width: 150px!important; height: 20px!important" placeholder="Username"/>
+                        <p:password value="#{loginController.password}"   style="border-radius: 0.0em; background: #feffff url(resources/images/loginInputLogo.png) no-repeat!important;padding: 10px 10px 10px 20px; background-position: 3px -52px !important; border: 1px solid rgb(204,204,204); width: 150px!important; height: 20px!important" placeholder="Password"/>
+                        <h:panelGroup>
+                            <p:commandButton value="Login" action="#{loginController.login()}"  style="width: 80px; height:30px;border-radius: 0.0em; margin-top: 20px;  background: -webkit-linear-gradient(top, #9F9F9F , #0A2693);"/>
+                            <h:commandLink value=" Create Account" title="Please Contact management" action="/pages/protected/investor/CreateAccount.xhtml?faces-redirect=true"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGrid>
+        </p:panel>
+        <!--</h:panelGroup>-->
+        <!--</p:fieldset>-->
+        
+
+        <!--<p:spacer width="0px" height="20px"/>-->
+        <!--<h:outputText value="Not Registered?" style="font-style: italic; color: #0A2693"/>-->
+        <!--<p:separator/>-->
+
+        <h:panelGroup rendered="false">
+            <h:form id="createAccountForm">
+                <p:commandButton value="Create Account" action="/pages/protected/investor/CreateAccount.xhtml?faces-redirect=true" style=" height:30px;border-radius: 0.0em; margin-top: 20px; border-radius: 5px; background: -webkit-linear-gradient(top, #9F9F9F , #9F9F9F); color: white;" actionListener="#{investorController.prepareCreate()}"/>
+            </h:form>
+        </h:panelGroup>
+
+</ui:define>
+</ui:composition>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquityMarketDayEditDlg" widgetVar="EquityMarketDayEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEquityMarketDayTitle}">
+            <h:form id="EquityMarketDayEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equityMarketDayController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEquityMarketDayLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{equityMarketDayController.selected.id}" title="#{bundle.EditEquityMarketDayTitle_id}" required="true" requiredMessage="#{bundle.EditEquityMarketDayRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditEquityMarketDayLabel_dateOfMarket}" for="dateOfMarket" />
+                        <p:calendar id="dateOfMarket" pattern="MM/dd/yyyy" value="#{equityMarketDayController.selected.dateOfMarket}" title="#{bundle.EditEquityMarketDayTitle_dateOfMarket}" required="true" requiredMessage="#{bundle.EditEquityMarketDayRequiredMessage_dateOfMarket}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEquityMarketDayLabel_ALSICurrent}" for="ALSICurrent" />
+                        <p:inputText id="ALSICurrent" value="#{equityMarketDayController.selected.ALSICurrent}" title="#{bundle.EditEquityMarketDayTitle_ALSICurrent}" required="true" requiredMessage="#{bundle.EditEquityMarketDayRequiredMessage_ALSICurrent}"/>
+                        <p:outputLabel value="#{bundle.EditEquityMarketDayLabel_LSICurrent}" for="LSICurrent" />
+                        <p:inputText id="LSICurrent" value="#{equityMarketDayController.selected.LSICurrent}" title="#{bundle.EditEquityMarketDayTitle_LSICurrent}" required="true" requiredMessage="#{bundle.EditEquityMarketDayRequiredMessage_LSICurrent}"/>
+                        <p:outputLabel value="#{bundle.EditEquityMarketDayLabel_autoTimestamp}" for="autoTimestamp" />
+                        <p:calendar id="autoTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{equityMarketDayController.selected.autoTimestamp}" title="#{bundle.EditEquityMarketDayTitle_autoTimestamp}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equityMarketDayController.update}" value="#{bundle.Save}" update="display,:EquityMarketDayListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EquityMarketDayEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquityMarketDayEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
